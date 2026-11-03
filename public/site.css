@@ -65,3 +65,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--plum);outline-offse
 
 .incident-source-image{display:block;width:100%;position:relative;padding:0;text-align:left}.incident-source-image>img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.incident-source-image>span{position:absolute;right:12px;bottom:12px;background:#191b1e;color:#fff;padding:9px 12px;font-size:9px}.incident-source-image:hover>span{background:var(--red)}
 .product-chapter-copy .product-roles{color:var(--ink)!important;font-weight:550;border-block:1px solid var(--line);padding:18px 0;margin:24px auto!important}.meta-entry-actions{display:flex;gap:22px;flex-wrap:wrap;margin-top:25px}.meta-entry-actions a{font-size:12px;text-underline-offset:6px}
+
+.public-demo-status{margin:0;padding:10px 24px;border-bottom:1px solid #d6dade;background:#f1f3f4;color:#42484d;font:500 13px/1.5 "Hanken Grotesk",sans-serif;text-align:center}
+[data-theme="dark"] .public-demo-status{background:#24292d;color:#d7dde1;border-color:#444b50}

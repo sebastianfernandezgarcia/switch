@@ -32,13 +32,13 @@ Opening pages, selecting trains, simulating, rewinding, inspecting evidence and 
 
 The bilingual story and workspace, four fictional missions, versioned scenario engine, linked 3D and occupancy timeline, national geographic graph, dated Renfe adapters, constrained Meta tools and inspectable/replay-verified model records were developed for the event. Original work is MIT; third-party assets retain their licences.
 
-The repository includes 70 automated tests and actual model/tool examples. Development examples are not a held-out accuracy benchmark or a railway-professional validation. A complete three-minute demo film has been prepared; its accessible link will be added after authorized publication.
+The repository includes 73 automated tests and actual model/tool examples. Development examples are not a held-out accuracy benchmark or a railway-professional validation. [Watch the demo film](https://youtu.be/ZQtdctddfSw): original voice, English subtitles and actual product footage. The source master is 180 seconds; the watch page displays 3:00.
 
 ## Scope and deployment
 
-This checkout is a local application. **Do not expose its local server or copy a private API key into a browser or public repository.** A shared public service needs individual visitor sessions, an explicitly configured external origin and a durable credit limiter. Render Free storage resets on restart, so the local JSON credit ledger must not be used there as a persistent spending cap.
+The local server stays private. `npm run start:public` starts a separate public showcase with individual visitor sessions, shared read-only geographic data, strict host/origin checks and request limits. New inference routes are blocked before provider access. No provider secret is needed: the simulator, public Renfe observations and labelled actual saved Meta runs work without one. A durable credit limiter is required before enabling new public model requests; Render Free restarts must never reset a spending cap.
 
-The public demonstration is being prepared separately. No live-hosting URL or submitted-candidature status is claimed here. See [deployment notes](docs/DEPLOYMENT.md).
+The Free deployment uses `render.yaml`. Its accessible URL will be added after the deployed service is verified. No submitted-candidature status is claimed. See [deployment notes](docs/DEPLOYMENT.md).
 
 The geographic view contains 60,018 IGN links and 3,606 station nodes. Renfe observations have limited coverage and expose source dates, stale points and missing feeds. Geographic connectivity is not movement authority or proof that track is available. The fictional engine has declared abstract rules and travel times.
 

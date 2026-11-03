@@ -42,6 +42,11 @@ export async function startServer(options = {}) {
   let networkExplorations, networkController=null, networkProgress=[];
   let compressedRailAsset;
   async function ensureNetwork() {
+    const shared = options.networkCache;
+    if (shared && !networkData) {
+      shared.base ??= readFile(join(ROOT, 'public/data/rail-network.json'), 'utf8').then(text => { const data = JSON.parse(text); return { data, graph: createGeographicGraph(data) }; });
+      const base = await shared.base; networkData = base.data; networkGraph = base.graph;
+    }
     if(!networkData){networkData=JSON.parse(await readFile(join(ROOT,'public/data/rail-network.json'),'utf8'));networkGraph=createGeographicGraph(networkData);}
     if(!networkRecordings){
       let doc={format:'switch-recorded-network-v1',records:[]};
@@ -120,6 +125,7 @@ export async function startServer(options = {}) {
       const host = req.headers.host;
       if (!['127.0.0.1:' + port, 'localhost:' + port].includes(host)) return send(res, 403, { error: 'HOST_REJECTED' });
       const route = new URL(req.url, 'http://' + host).pathname;
+      if (req.method === 'GET' && route === '/api/deployment') return send(res, 200, { mode: 'local', newInference: agentStatus(env).ready });
       if (req.method === 'GET' && route === '/api/showcase') return send(res,200,view().intro);
       if (req.method === 'GET' && route === '/api/state') return send(res, 200, view());
       if (req.method === 'GET' && route === '/api/network/live') return send(res, 200, await liveRail());

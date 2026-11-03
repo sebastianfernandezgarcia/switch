@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: switch-rail-demo
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm test
+    startCommand: npm run start:public
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production

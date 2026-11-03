@@ -1,21 +1,15 @@
-# Public demonstration preparation
+# Free public showcase
 
-The current server binds to localhost and preserves a local review session. Public deployment is a separate step; the repository and demo video can be published first. No public service is created by this checkout.
+The public entry point is `npm run start:public`. The local server remains available through `npm start`. `render.yaml` selects a Free Node web service, runs the test suite during build and checks `/healthz`.
 
-The proposed host is the participant's personal Render account, using Free instances only and no payment card. The account was checked on 3 November 2026: Hobby, no card on file.
+The gateway binds to `0.0.0.0` and `PORT`, using `RENDER_EXTERNAL_URL` or an exact `SWITCH_PUBLIC_ORIGIN` for Host/Origin checks. Each visitor gets an opaque HttpOnly/SameSite cookie and a private workspace. HTTPS sets Secure. Visitors cannot overwrite or cancel another visitor's case. Geometry and the public Renfe fetch cache are shared, not mutable session state. Idle workspaces expire; state also resets when the Free service sleeps or restarts.
 
-Before exposing an API-enabled public service:
+The public showcase blocks all four new-inference routes before provider access, even if a provider key is accidentally present. Saved actual Meta outputs remain labelled and replay-verified. No secrets or private credit records are deployed. This makes the initial public demo independent of the author's Mac without risking a resettable credit cap.
 
-1. Bind an explicitly configured public server to `0.0.0.0` and `PORT`; keep an exact external Host/Origin allowlist.
-2. Isolate visitor sessions and prevent one visitor from cancelling or changing another's run.
-3. Store credit reservations in durable storage before every provider call. Seed the previously consumed reservation balance rather than restarting it at zero. Existing authorization is five USD total; do not expand it silently.
-4. Keep the provider key exclusively in authorized server secrets. Fail closed when the durable meter is unavailable. Apply request limits.
-5. Verify the deployed app from a clean browser with no author session, including failure, cancellation and replay paths.
+Before enabling new public inference: provision durable reservations, seed the previously consumed balance, retain the existing total authorization and store the provider credential only in an authorized server secret. Fail closed when the meter is unavailable. This is a separate activation step; do not bypass the gateway block.
 
-Render Free has an ephemeral filesystem, no persistent disk, 750 shared instance hours per month and cold starts after inactivity. It must not host a resettable file-based spending meter. Free PostgreSQL may provide durable storage during evaluation, but expires after 30 days and must be configured/verified before enabling inference. Neither resource has been created for SWITCH.
+Render Free can cold-start after inactivity and has 750 shared instance hours monthly. Its filesystem resets on restart, and Free PostgreSQL expires after 30 days. The personal Render workspace was checked on 3 November 2026: Hobby and no card on file. No paid upgrade is needed for this showcase.
 
 References checked 3 November 2026:
 - https://render.com/docs/free
 - https://render.com/docs/web-services
-
-The local app remains available, the film already shows actual Meta inference, and a public copy must state clearly whether it offers new inference or saved actual results. No paid upgrade or always-on promise is implied.

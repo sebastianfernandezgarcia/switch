@@ -14,3 +14,6 @@
 .fleet-source{display:flex;gap:12px;border-top:1px solid var(--line);padding-top:12px;margin-top:16px}.fleet-source button{font-size:8px;padding:5px 0;border-bottom:1px solid transparent;color:var(--muted)}.fleet-source button[aria-pressed=true]{border-color:var(--red);color:var(--ink)}.fleet-archive-label{font-size:8px!important;color:var(--red)!important;font-weight:600;line-height:1.7!important}.fleet-actions button:disabled{opacity:.4;cursor:not-allowed}
 /* Focus fills the actual viewport even when the mobile incident layout has a taller selector. */
 .workspace-page.focus-3d #stage .network-pane{height:100svh;min-height:0;max-height:none}
+
+.public-demo-status{margin:0;padding:10px 24px;border-bottom:1px solid #d6dade;background:#f1f3f4;color:#42484d;font:500 13px/1.5 "Hanken Grotesk",sans-serif;text-align:center}
+[data-theme="dark"] .public-demo-status{background:#24292d;color:#d7dde1;border-color:#444b50}
