@@ -8,9 +8,10 @@ The fatal accidents at Adamuz and Urda motivated this personal project. Their hu
 
 ## Run it
 
-Use Node 20.16 or later. The application has no npm dependencies, no required local model and no paid map service.
+Use Node 20.16 or later. No local model or paid map service is required. The PostgreSQL client is used only by the optional persistent public credit meter.
 
 ```sh
+npm ci --ignore-scripts
 npm test
 npm start
 ```
@@ -32,13 +33,13 @@ Opening pages, selecting trains, simulating, rewinding, inspecting evidence and 
 
 The bilingual story and workspace, four fictional missions, versioned scenario engine, linked 3D and occupancy timeline, national geographic graph, dated Renfe adapters, constrained Meta tools and inspectable/replay-verified model records were developed for the event. Original work is MIT; third-party assets retain their licences.
 
-The repository includes 73 automated tests and actual model/tool examples. Development examples are not a held-out accuracy benchmark or a railway-professional validation. [Watch the demo film](https://youtu.be/ZQtdctddfSw): original voice, English subtitles and actual product footage. The source master is 180 seconds; the watch page displays 3:00.
+The repository includes 78 automated tests and actual model/tool examples. Development examples are not a held-out accuracy benchmark or a railway-professional validation. [Watch the demo film](https://youtu.be/ZQtdctddfSw): original voice, English subtitles and actual product footage. The source master is 180 seconds; the watch page displays 3:00.
 
 ## Scope and deployment
 
-The local server stays private. `npm run start:public` starts a separate public showcase with individual visitor sessions, shared read-only geographic data, strict host/origin checks and request limits. New inference routes are blocked before provider access. No provider secret is needed: the simulator, public Renfe observations and labelled actual saved Meta runs work without one. A durable credit limiter is required before enabling new public model requests; Render Free restarts must never reset a spending cap.
+The local server stays private. `npm run start:public` starts a separate public showcase with individual visitor sessions, shared read-only geographic data, strict host/origin checks and request limits. New inference is paused by default. The simulator, public Renfe observations and labelled actual saved Meta runs need no provider secret. Optional activation requires a pre-seeded PostgreSQL meter and an authorized server-side provider secret. Each request reserves credit atomically before calling Meta; a missing or unavailable meter blocks new inference. Render restarts cannot create a fresh budget.
 
-The Free deployment uses `render.yaml`. Its accessible URL will be added after the deployed service is verified. No submitted-candidature status is claimed. See [deployment notes](docs/DEPLOYMENT.md).
+The Free deployment uses `render.yaml`. [Open the public demo](https://switch-rail-demo.onrender.com/). The first visit after inactivity can take about a minute while the Free service wakes. The deployment banner reports whether new inference is active or paused. No submitted-candidature status is claimed. See [deployment notes](docs/DEPLOYMENT.md).
 
 The geographic view contains 60,018 IGN links and 3,606 station nodes. Renfe observations have limited coverage and expose source dates, stale points and missing feeds. Geographic connectivity is not movement authority or proof that track is available. The fictional engine has declared abstract rules and travel times.
 

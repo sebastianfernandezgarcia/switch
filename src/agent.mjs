@@ -26,7 +26,7 @@ const SYSTEM = `You are SWITCH's rehearsal agent, using Meta. This is a fictiona
 export function agentStatus(env = process.env) {
   try {
     const ledger = readCreditLedger(env.SWITCH_AGENT_CREDIT_LEDGER_FILE);
-    const cap = Math.min(4, Number(env.SWITCH_AGENT_CREDIT_BUDGET_USD) || 0, ledger.capMicros / 1e6);
+    const cap = Math.min(env.SWITCH_AGENT_CREDIT_LEDGER_FILE?.startsWith('durable:') ? 9 : 4, Number(env.SWITCH_AGENT_CREDIT_BUDGET_USD) || 0, ledger.capMicros / 1e6);
     const remaining = Math.max(0, Math.min(cap * 1e6, ledger.capMicros) - ledger.reservedMicros) / 1e6;
     return { provider: 'baseten', model: MODEL, mode: 'tool_using_agent',
       ready: env.SWITCH_AGENT_ALLOW_CREDIT_USAGE === '1' && !!env.BASETEN_API_KEY && cap > 0 && remaining >= .08,

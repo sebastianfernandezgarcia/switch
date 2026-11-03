@@ -1,3 +1,4 @@
+import { isDurableLedger, readDurableLedger, reserveDurableCredit } from './durable-credits.mjs';
 import { readFileSync } from 'node:fs';
 import { open, readFile, writeFile, rename, unlink } from 'node:fs/promises';
 import { isAbsolute, dirname, basename, join } from 'node:path';
@@ -13,9 +14,11 @@ function validate(file, value) {
   return value;
 }
 export function readCreditLedger(file) {
+  if (isDurableLedger(file)) return readDurableLedger(file);
   try { return validate(file, JSON.parse(readFileSync(file, 'utf8'))); } catch { fail(); }
 }
 export function reserveCredit(file, amountUsd, capUsd) {
+  if (isDurableLedger(file)) return reserveDurableCredit(file, amountUsd, capUsd);
   const previous = queues.get(file) || Promise.resolve();
   const operation = previous.catch(() => {}).then(() => reserve(file, amountUsd, capUsd));
   queues.set(file, operation);

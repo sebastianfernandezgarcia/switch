@@ -52,3 +52,11 @@ test('external origin rejects cross-site writes and spoofed hosts; health does n
   assert.equal(visitor.status, 200);
   assert.match(visitor.headers['set-cookie'][0], /HttpOnly; SameSite=Lax; Max-Age=1800; Secure/);
 });
+
+test('explicit activation without a valid durable meter keeps provider access paused', async t => {
+  const base = await fixture(t, { env: { SWITCH_PUBLIC_INFERENCE: '1', BASETEN_API_KEY: 'test-only-not-a-real-key', DATABASE_URL: 'not-a-postgres-connection' } });
+  assert.equal((await (await fetch(base + '/healthz')).json()).newInference, false);
+  const attempt = await fetch(base + '/api/network/explore', { method: 'POST', headers: { Origin: base, 'Content-Type': 'application/json' }, body: '{}' });
+  assert.equal(attempt.status, 403);
+  assert.equal((await attempt.json()).error, 'PUBLIC_INFERENCE_PAUSED');
+});

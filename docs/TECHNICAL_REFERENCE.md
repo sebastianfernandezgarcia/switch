@@ -50,7 +50,7 @@ The national agent permits at most four rounds/90seconds with3072 output tokens 
 npm test
 ```
 
-70 tests cover scenario constraints, opposing/following reservations, evolving evidence, preserved branches, exact/newest citations, bounded actual tool consumption, budgets/concurrency, cancellation, stale responses, public-feed normalization, tampered saved output, occupancy-to-engine identity, independent pages and zero-inference navigation. Fixtures do not spend credits. The clean extracted review package runs without credentials.
+78 tests cover scenario constraints, opposing/following reservations, evolving evidence, preserved branches, exact/newest citations, bounded actual tool consumption, budgets/concurrency, cancellation, stale responses, public-feed normalization, tampered saved output, occupancy-to-engine identity, independent pages and zero-inference navigation. Fixtures do not spend credits. The clean extracted review package runs without credentials.
 
 ## Story and media
 

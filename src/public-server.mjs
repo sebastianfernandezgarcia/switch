@@ -6,13 +6,14 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { startServer } from './server.mjs';
 import { createLiveRailClient } from './live-rail.mjs';
+import { openDurableCredits } from './durable-credits.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const INFERENCE_ROUTES = new Set(['/api/analyse', '/api/rehearse', '/api/network/review', '/api/network/explore']);
 const COOKIE = 'switch_demo';
 
-// Public visitors get independent local workspaces. No provider key or writable
-// credit ledger is passed into this free showcase; recorded actual runs stay labelled.
+// Visitors have independent workspaces. Provider access is disabled by default;
+// activation requires an existing durable meter. Actual saved runs stay labelled.
 export async function startPublicServer(options = {}) {
   const env = options.env ?? process.env;
   const configured = options.origin ?? env.SWITCH_PUBLIC_ORIGIN ?? env.RENDER_EXTERNAL_URL;
@@ -24,6 +25,13 @@ export async function startPublicServer(options = {}) {
   const visitors = new Map();
   const liveRail = options.liveRail ?? createLiveRailClient();
   const networkCache = {};
+  let durable;
+  if (env.SWITCH_PUBLIC_INFERENCE === '1' && env.BASETEN_API_KEY) {
+    try { durable = await openDurableCredits({ connectionString: env.DATABASE_URL }); }
+    catch { console.warn('Public inference paused: durable credit meter unavailable.'); }
+  }
+  const inferenceAvailable = () => !!durable?.healthy && !!env.BASETEN_API_KEY;
+  const providerEnv = durable ? { ...durable.env, BASETEN_API_KEY: env.BASETEN_API_KEY } : {};
   const maxVisitors = options.maxVisitors ?? 24;
   const idleMs = options.idleMs ?? 30 * 60_000;
   let closed = false;
@@ -54,12 +62,12 @@ export async function startPublicServer(options = {}) {
       if (!allowedHosts.includes(req.headers.host)) return send(res, 403, { error: 'HOST_REJECTED' });
       const path = new URL(req.url, origin).pathname;
       if (req.method === 'GET' && path === '/healthz') {
-        return send(res, 200, { status: 'ok', mode: 'public_showcase', newInference: false, version: '0.12.0' });
+        return send(res, 200, { status: 'ok', mode: 'public_showcase', newInference: inferenceAvailable(), version: '0.13.0' });
       }
-      if (req.method === 'GET' && path === '/api/deployment') return send(res, 200, { mode: 'public_showcase', newInference: false });
+      if (req.method === 'GET' && path === '/api/deployment') return send(res, 200, { mode: 'public_showcase', newInference: inferenceAvailable() });
       if (!['GET', 'POST', 'HEAD'].includes(req.method)) return send(res, 405, { error: 'METHOD_NOT_ALLOWED' });
       if (req.method === 'POST' && req.headers.origin !== origin) return send(res, 403, { error: 'ORIGIN_REJECTED' });
-      if (INFERENCE_ROUTES.has(path)) {
+      if (INFERENCE_ROUTES.has(path) && !inferenceAvailable()) {
         return send(res, 403, { error: 'PUBLIC_INFERENCE_PAUSED', message: 'New Meta requests are paused in this public demo. Inspect the labelled actual saved runs; the simulator and published train observations remain available.' });
       }
       const match = (req.headers.cookie ?? '').match(/(?:^|;\s*)switch_demo=([a-f0-9-]{36})(?:;|$)/);
@@ -67,8 +75,8 @@ export async function startPublicServer(options = {}) {
       if (!entry) {
         if (visitors.size >= maxVisitors) return send(res, 503, { error: 'DEMO_BUSY', message: 'The demo is busy. Please try again shortly.' });
         id = randomUUID();
-        entry = { lastSeen: Date.now(), active: 0, windowStart: Date.now(), requests: 0 };
-        entry.promise = startServer({ port: 0, dataDir: join(root, id), env: {}, liveRail, networkCache,
+        entry = { lastSeen: Date.now(), active: 0, windowStart: Date.now(), requests: 0, inferences: 0 };
+        entry.promise = startServer({ port: 0, dataDir: join(root, id), env: providerEnv, liveRail, networkCache,
           recordedFile: join(ROOT, 'examples/recorded-meta.json'), agentRecordedFile: join(ROOT, 'examples/recorded-agent.json') });
         visitors.set(id, entry);
         res.setHeader('Set-Cookie', `${COOKIE}=${id}; Path=/; HttpOnly; SameSite=Lax; Max-Age=1800${external?.protocol === 'https:' ? '; Secure' : ''}`);
@@ -76,6 +84,7 @@ export async function startPublicServer(options = {}) {
       entry.lastSeen = Date.now();
       if (Date.now() - entry.windowStart > 60_000) { entry.windowStart = Date.now(); entry.requests = 0; }
       if (++entry.requests > 300) return send(res, 429, { error: 'RATE_LIMITED' });
+      if (INFERENCE_ROUTES.has(path) && ++entry.inferences > 3) return send(res, 429, { error: 'DEMO_REQUEST_LIMIT', message: 'This visit has reached its new-request limit. Saved actual runs and the simulator remain available.' });
       entry.active++;
       let settled = false;
       const finish = () => { if (!settled) { settled = true; entry.active--; } };
@@ -102,6 +111,7 @@ export async function startPublicServer(options = {}) {
     server.closeAllConnections();
     await new Promise(resolve => server.close(resolve));
     await Promise.all([...visitors].map(([id, entry]) => release(id, entry)));
+    await durable?.close();
     await rm(root, { recursive: true, force: true });
   };
   return server;
@@ -109,6 +119,6 @@ export async function startPublicServer(options = {}) {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const server = await startPublicServer();
-  console.log(`SWITCH public showcase listening on ${server.address().port}; new inference paused.`);
+  console.log(`SWITCH public showcase listening on ${server.address().port}; inference depends on the durable credit meter.`);
   for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, () => { void server.shutdown().then(() => process.exit(0)); });
 }
