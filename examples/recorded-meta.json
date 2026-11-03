@@ -1,0 +1,129 @@
+{
+  "format": "switch-recorded-meta-v1",
+  "notice": "Actual Baseten responses on fictional cases. All displayed as recordings. No inference occurs when loading them. No real train data or credentials.",
+  "records": [
+    {
+      "id": "3b564375-a810-4dae-a5a1-346bbe0eccee",
+      "at": "2026-11-01T11:01:06.327Z",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "kind": "real_meta_inference_on_fictional_scenario",
+      "elapsedMs": 1954,
+      "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+      "parameters": {
+        "clearanceMinutes": 0,
+        "bypassOpen": true
+      },
+      "proposal": {
+        "title": "R2 libre confirmado - sin contradicción",
+        "summary": "En este ejercicio ficticio se confirma que R2 está libre desde las 08:16:45, y S2 registra esa confirmación para coordinar T12 y T31. No hay contradicción sobre la limpieza de R2; el problema pendiente es secuenciar a T12 y T31 que ambos necesitan R2, con el desvío de 6 minutos como alternativa más larga que los 4 minutos por R2.",
+        "focus": "R2",
+        "clearanceState": "confirmed",
+        "evidence": [
+          {
+            "sourceId": "S1",
+            "quote": "En este ejercicio ficticio se confirma que T07 ha abandonado R2 por completo. R2 está libre desde las 08:16:45."
+          },
+          {
+            "sourceId": "S2",
+            "quote": "Coordinación registra la confirmación de salida de T07. T12 espera en Central y T31 llega desde Costa; ambos necesitarán R2."
+          }
+        ],
+        "nextQuestion": "¿Confirmamos el orden de entrada a R2 entre T12 y T31 y si alguno usará el desvío para evitar espera sucesiva?",
+        "plans": [
+          {
+            "strategy": "wait",
+            "reason": "T12 toma R2 inmediatamente al estar libre confirmado; T31 sigue después de T12 completando sus 4 minutos, sin espera extra de limpieza."
+          },
+          {
+            "strategy": "bypass",
+            "reason": "T12 usa el desvío Central-Ladera-Valle (6 min) si está abierto; T31 puede usar R2 (4 min) directamente al estar libre, evitando solapamiento."
+          }
+        ]
+      },
+      "scenarioId": "clearance-received-03"
+    },
+    {
+      "id": "8675c777-dd20-40db-80b2-79465de4ff81",
+      "at": "2026-11-01T10:32:48.653Z",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "kind": "real_meta_inference_on_fictional_scenario",
+      "elapsedMs": 2212,
+      "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+      "parameters": {
+        "clearanceMinutes": 4,
+        "bypassOpen": true
+      },
+      "proposal": {
+        "title": "Ensayo ficcional: R2 sin confirmación de desalojo",
+        "summary": "Escenario ficticio: T07 visto en R2 hace 180s sin actualización y mensajes contradictorios sin verificación impiden asumir R2 libre; ambas estrategias son hipótesis condicionadas a suposición de desalojo.",
+        "focus": "R2",
+        "clearanceState": "unconfirmed",
+        "evidence": [
+          {
+            "sourceId": "S1",
+            "quote": "T07 fue observado en R2, entre Valle y Central. No se han recibido nuevas posiciones."
+          },
+          {
+            "sourceId": "S3",
+            "quote": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+          }
+        ],
+        "nextQuestion": "¿Qué confirmación verificada específica permitiría considerar R2 libre y qué marca temporal tendría?",
+        "plans": [
+          {
+            "strategy": "wait",
+            "reason": "Asume hipotéticamente que R2 quedará libre tras los 4 min supuestos; requiere confirmación verificada de salida de T07 antes de autorizar."
+          },
+          {
+            "strategy": "bypass",
+            "reason": "Asume usar C-E-B si está abierto para evitar R2; igualmente depende de suposición no verificada sobre disponibilidad y desalojo."
+          }
+        ]
+      },
+      "scenarioId": "corridor-north-01"
+    },
+    {
+      "id": "9b9a4fee-9aa3-4b55-995a-981cbdaad9a4",
+      "at": "2026-11-01T11:00:31.966Z",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "kind": "real_meta_inference_on_fictional_scenario",
+      "elapsedMs": 2195,
+      "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04",
+      "parameters": {
+        "clearanceMinutes": 6,
+        "bypassOpen": false
+      },
+      "proposal": {
+        "title": "Ladera: conflicto de vía y cierre - evaluación ficticia",
+        "summary": "Según los datos del ejercicio, T07 permanece en R2 sin confirmación de salida, con posición de hace 2 minutos, y el desvío R5 está cerrado; la propuesta por radio de enviar T12 por Ladera no verifica ninguna de las dos condiciones, por lo que no puede asumirse vía libre y queda pendiente resolver la programación sin solapamientos bajo el tiempo de despeje supuesto por el usuario.",
+        "focus": "R2",
+        "clearanceState": "unconfirmed",
+        "evidence": [
+          {
+            "sourceId": "S1",
+            "quote": "T07 permanece sin confirmación de salida de R2. El último dato disponible tiene dos minutos."
+          },
+          {
+            "sourceId": "S3",
+            "quote": "Se propone enviar T12 por Ladera. La propuesta no incorpora el cierre de R5 ni confirma la salida de T07."
+          }
+        ],
+        "nextQuestion": "¿Qué verificación confirmaría la salida de T07 de R2 y cuándo se espera la reapertura de R5 para evaluar tiempos ficticios?",
+        "plans": [
+          {
+            "strategy": "wait",
+            "reason": "T12 aguardaría en línea principal hasta el despeje supuesto de R2 (6 min según asunción del ejercicio) y luego ocupa R2 completo; T31 sigue después sin superposición, respetando que cada recorrido reserva un tramo entero."
+          },
+          {
+            "strategy": "bypass",
+            "reason": "Estrategia no disponible en este ejercicio: R5 entre Central y Ladera está cerrado por mantenimiento (S2), por lo que el desvío C-E-B no puede usarse y no hay alternativa de rodeo evaluable."
+          }
+        ]
+      },
+      "scenarioId": "ladera-closed-02"
+    }
+  ]
+}

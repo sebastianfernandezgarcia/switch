@@ -1,0 +1,118 @@
+/* One surface for observing; one deliberate action for reasoning. */
+#network{--console-height:min(730px,calc(100svh - 270px))}
+.workspace-page #network .national-heading{margin-bottom:22px}
+.workspace-page #network .national-toolbar{gap:20px;min-height:66px;flex-wrap:wrap}
+.workspace-page #network .national-stat{gap:7px}
+.workspace-page #network .national-stat strong{font-size:23px;font-weight:570}
+.workspace-page #network .national-stat>span{font-size:9px;max-width:100px}
+.live-freshness{display:flex;align-items:center;gap:7px;font-size:9px;color:var(--muted)}
+.live-freshness strong{font-size:22px;font-weight:570;color:var(--ink);letter-spacing:-.8px}
+.live-dot{width:6px;height:6px;background:var(--plum);border-radius:50%}
+.national-refresh{gap:12px;flex-wrap:wrap}
+#network-countdown{font-size:8px;font-variant-numeric:tabular-nums;min-width:87px;color:var(--muted)}
+#network-focus{font-size:10px;border:1px solid var(--line);padding:11px 13px;background:var(--paper);color:var(--ink)}
+#network-focus:hover{border-color:var(--plum)}
+.workspace-page #network .national-workspace{grid-template-columns:minmax(0,1fr) 350px;align-items:stretch}
+.workspace-page #network .national-map-shell{height:var(--console-height);min-height:520px;position:sticky;top:84px}
+.workspace-page #network .national-inspector{padding:22px;max-height:max(520px,var(--console-height));overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;position:sticky;top:84px;align-self:start;background:var(--paper)}
+.console-nav{display:flex;margin:-22px -22px 24px;padding:0 18px;gap:4px;border-bottom:1px solid var(--line);position:sticky;top:-22px;z-index:15;background:var(--paper)}
+.console-nav button{padding:17px 12px 15px;flex:1;font-size:11px;color:var(--muted);border-bottom:2px solid transparent}
+.console-nav button[aria-selected=true]{border-color:var(--plum);color:var(--ink);font-weight:600}
+#network[data-console-panel=trains] #network-copilot,#network[data-console-panel=trains] .route-disclosure,#network[data-console-panel=trains] #network-meta,#network[data-console-panel=trains] #network-pick{display:none}
+#network[data-console-panel=meta] .fleet-panel,#network[data-console-panel=meta] .route-disclosure,#network[data-console-panel=meta] #network-meta,#network[data-console-panel=meta] #network-pick{display:none}
+#network[data-console-panel=route] .fleet-panel,#network[data-console-panel=route] #network-copilot{display:none}
+#network[data-console-panel=route] .route-disclosure{border:0;margin:0;padding:0}
+#network[data-console-panel=route] .route-disclosure>summary{display:none}
+#network[data-console-panel=route] .route-disclosure-body{padding-top:0}
+#network[data-console-panel=route] #network-pick[data-kind=vehicle]{display:none}
+#network .national-panel-kicker{font-size:8px;letter-spacing:.08em}
+#network .fleet-heading h3{font-size:30px;margin-bottom:17px}
+#network .fleet-panel{margin-bottom:18px}
+#network .fleet-panel label{font-size:9px;margin-top:14px}
+#network .fleet-panel input[type=search]{font-size:13px;padding:10px 0}
+#network .fleet-panel select{font-size:11px;padding:8px 0;background:var(--paper);color:var(--ink)}
+#network .fleet-filters{gap:6px;margin:14px 0 10px}
+#network .fleet-filters button{font-size:9px;padding:7px 8px}
+#network .fleet-list{max-height:240px}
+#network .fleet-list>button{padding:11px 0}
+#network .fleet-list>button:hover{background:var(--ground)}
+#network .fleet-list strong{font-size:12px}
+#network .fleet-list small{font-size:9px}
+#network .fleet-source{gap:14px;margin-top:14px}
+#network .fleet-source button{font-size:9px}
+#network .fleet-selection{margin-top:22px;padding-top:0}
+.train-facts{display:grid;grid-template-columns:1fr;gap:12px;margin:17px 0}
+.train-facts>span{font-size:8px;color:var(--muted);line-height:1.6;letter-spacing:.05em}
+.train-facts strong{font-size:11px;letter-spacing:0;font-weight:500;display:block;color:var(--ink)}
+.train-trail-note{font-size:9px!important;color:var(--plum)!important}
+#network .fleet-actions button{font-size:10px}
+#network .fleet-meta{font-size:11px}
+#network .network-copilot{border-top:0;padding-top:0;margin-bottom:12px}
+#network .copilot-eyebrow{font-size:8px;margin:0 0 12px}
+#network .network-copilot h3{font-size:32px;margin:0 0 20px;letter-spacing:-1.3px}
+.meta-explainer{border-left:2px solid var(--plum);padding:0 0 0 13px;margin-bottom:20px}
+.meta-explainer p:first-child{font-size:13px;line-height:1.45;letter-spacing:-.2px;color:var(--ink);margin:0 0 8px}
+.meta-explainer p+p{font-size:10px;line-height:1.7;color:var(--muted);margin:0}
+#network .copilot-contract{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 0;margin:0 0 17px;border-block:1px solid var(--line);list-style:none}
+#network .copilot-contract li{display:flex;flex-direction:column;gap:8px;line-height:1.5;font-size:9px;color:var(--muted)}
+#network .copilot-contract b{font-size:10px;color:var(--plum);font-weight:550}
+#network .copilot-idle{font-size:10px;max-width:none;line-height:1.7}
+#network .network-copilot label{font-size:10px;margin-bottom:8px}
+#network .network-copilot textarea{font-size:12px;line-height:1.65;min-height:108px;background:var(--paper);border-color:var(--line);padding:12px}
+#network .copilot-suggestions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+#network .copilot-suggestions button{font-size:10px;line-height:1.5;padding:10px;text-align:left}
+#network #copilot-ask{padding:15px;font-size:12px;font-weight:500}
+#network #copilot-ask:disabled{opacity:.5;cursor:wait}
+#network #copilot-status{font-size:10px;line-height:1.7}
+#network #copilot-progress li{font-size:10px;line-height:1.6;padding:9px 0}
+.copilot-result-kind{font-size:8px;color:var(--plum);letter-spacing:.08em;text-transform:uppercase;margin:22px 0 10px}
+#network #copilot-result h4{font-size:23px;line-height:1.15;margin-top:8px;letter-spacing:-.6px}
+#network #copilot-result p{font-size:12px;line-height:1.8}
+#network #copilot-tests button{font-size:11px;padding:13px;line-height:1.6}
+#network #copilot-tests button[data-feasible=false]{color:var(--red);border-left:2px solid var(--red)}
+#network #copilot-tests button[data-feasible=true]{border-left:2px solid var(--green)}
+#network .copilot-alert{padding:18px 14px;border:1px solid var(--line);border-left:3px solid var(--red);background:var(--paper)}
+#network .copilot-alert h5{font-size:18px;font-weight:550;line-height:1.3;margin:10px 0}
+#network .copilot-alert p{font-size:11px!important}
+#network #copilot-recordings{border-top:1px solid var(--line);padding-top:12px;margin-top:20px}
+#network #copilot-recordings button{font-size:10px;padding:10px 0;width:100%;border-bottom:1px solid var(--line);color:var(--muted)}
+#network .national-scope{font-size:9px;margin-top:22px;line-height:1.8}
+#network .national-data-details summary{font-size:10px;line-height:1.7}
+#network .national-map-top{display:flex;flex-wrap:wrap;gap:8px;align-items:start}
+#network .national-map-top>div{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:5px;max-width:75%}
+#network .national-map-top button{font-size:9px;padding:9px 10px}
+#network .national-map-top #network-pick-live{background:var(--plum);color:#fff;border-color:var(--plum)}
+#network .national-map-top button:disabled{opacity:.5}
+#network .map-mode{font-size:7px;line-height:1.6;max-width:125px}
+#network .national-legend .legend-observed:before{background:var(--plum)}
+body.network-focus{overflow:hidden}
+body.network-focus #network{position:fixed;inset:74px 0 0;z-index:35;padding:0 20px 20px;background:var(--paper);display:flex;flex-direction:column}
+body.network-focus #network .national-heading{display:none}
+body.network-focus #network .national-toolbar{flex:0 0 auto;min-height:65px}
+body.network-focus #network .national-workspace{flex:1;min-height:0;grid-template-columns:minmax(0,1fr) 365px}
+body.network-focus #network .national-map-shell{height:100%;min-height:0;position:relative;top:0}
+body.network-focus #network .national-inspector{height:100%;min-height:0;max-height:none;position:relative;top:0}
+@media(max-width:1100px){.workspace-page #network .national-workspace{grid-template-columns:minmax(0,1fr) 315px}.workspace-page #network .national-toolbar>.national-stat:nth-child(2){display:none}.national-refresh{gap:10px}#network-live-status{max-width:130px;line-height:1.6}#network-countdown{display:none}#network .national-map-top>div{max-width:100%}#network .map-mode{display:none}#network .national-map-top{justify-content:flex-end}}
+@media(max-width:760px){
+ .workspace-page #network{padding-inline:18px;padding-top:24px}
+ .workspace-page #network .national-heading h2{font-size:35px}
+ .workspace-page #network .national-heading p:not(.chapter-label){font-size:12px}
+ .workspace-page #network .national-toolbar{gap:17px;padding:15px 0}
+ .workspace-page #network .national-stat{display:flex}.workspace-page #network .national-stat strong{font-size:22px}.workspace-page #network .national-stat>span{font-size:8px;max-width:75px}
+ .live-freshness strong{font-size:22px}.live-freshness>span:last-child{font-size:8px;max-width:60px;line-height:1.5}
+ .national-refresh{flex-basis:100%;justify-content:space-between;gap:8px}
+ #network-live-status{max-width:180px;font-size:9px}#network-focus{display:none}
+ .workspace-page #network .national-workspace{display:flex;flex-direction:column}
+ .workspace-page #network .national-map-shell{height:440px;min-height:440px;position:relative;top:0}
+ .workspace-page #network .national-inspector{position:relative;top:0;max-height:none;overflow:visible;padding:22px;width:100%}
+ .console-nav{position:static}.console-nav button{font-size:12px;padding-block:17px}
+ #network .national-map-top{top:12px;left:12px;right:12px}
+ #network .national-map-top>div{gap:4px}#network .national-map-top button{font-size:8px;padding:8px}
+ #network .fleet-panel input[type=search]{font-size:15px}#network .fleet-list strong{font-size:14px}#network .fleet-list small{font-size:10px}#network .fleet-filters button{font-size:10px}#network .fleet-source button{font-size:10px}
+ #network .network-copilot textarea{font-size:14px}#network .copilot-contract li{font-size:10px}
+}
+#network .fleet-panel[data-selected=true] .fleet-filters,#network .fleet-panel[data-selected=true] .fleet-source,#network .fleet-panel[data-selected=true] #fleet-service,#network .fleet-panel[data-selected=true] #fleet-service-label{display:none}
+#network .fleet-panel[data-selected=true] .fleet-list{max-height:150px;margin-top:20px}
+.fleet-clear{font-size:9px;color:var(--muted);padding:0 0 14px;text-align:left;display:block}
+.train-receipt{font-size:9px;color:var(--muted);margin:14px 0;line-height:1.8}.train-receipt summary{cursor:pointer}.train-receipt code,.train-receipt time{font-size:10px;display:block;color:var(--ink);margin-top:10px}.train-receipt p{font-size:9px!important;line-height:1.6!important}
+#network #copilot-result .copilot-source-scope{font-size:9px;color:var(--muted);line-height:1.65;margin:0 0 17px;border-bottom:1px solid var(--line);padding-bottom:13px}

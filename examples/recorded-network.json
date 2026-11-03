@@ -1,0 +1,325 @@
+{
+  "format": "switch-recorded-network-v1",
+  "records": [
+    {
+      "id": "b0c59ce5-4126-4d1b-84dc-ce3a703d9b02",
+      "at": "2026-11-01T23:27:39.772Z",
+      "kind": "real_meta_geographic_review",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "scenarioHash": "fcae3bcd7a2b49449b9f8c67c30c040bb7c8a4d7174595aafad903a0fe0757fe",
+      "conditions": {
+        "fromId": "FCEST_N280790000017",
+        "toId": "FCEST_N410910000061",
+        "gauge": "1435",
+        "blocked": []
+      },
+      "sources": [
+        {
+          "id": "IGN",
+          "source": "https://api-features.idee.es/collections/railwaylink",
+          "license": "CC-BY-4.0",
+          "description": "Real IGN cartographic rail links; plan-view endpoint connectivity only. Operational status, permitted turns, signalling and movement authority are not supplied. Distances follow original polylines; no journey-time prediction."
+        },
+        {
+          "id": "CONDITIONS",
+          "from": "Estación de Madrid-P. de Atocha Almudena Grandes",
+          "to": "Estación de Sevilla-Santa Justa",
+          "gauge": "1435",
+          "hypotheticalClosures": [],
+          "description": "Closures are user-authored what-if assumptions, not real incidents. All gauges means rolling-stock compatibility has NOT been checked."
+        },
+        {
+          "id": "RESULTS",
+          "baseline": {
+            "feasible": true,
+            "code": "GEOGRAPHIC_PATH",
+            "distanceKm": 473.66038000000015,
+            "edgeCount": 458,
+            "stationOffsetsMetres": [
+              4,
+              25
+            ]
+          },
+          "afterClosures": {
+            "feasible": true,
+            "code": "GEOGRAPHIC_PATH",
+            "distanceKm": 473.66038000000015,
+            "edgeCount": 458,
+            "stationOffsetsMetres": [
+              4,
+              25
+            ]
+          },
+          "description": "Computed by independent local geographic graph, not by the language model. No invented detour if no path remains."
+        }
+      ],
+      "proposal": {
+        "en": {
+          "summary": "On source IGN plan-view geometry with CONDITIONS as hypothetical what-if, the geographic engine found a connected path before and after. Both return 473.7 km over 458 edges (offsets 4m/25m). Closures do not apply to this engine run, so no isolation or detour is shown. This is not an operating, clearance or timetable claim; permitted movements, signalling and gauge compatibility were not checked.",
+          "question": "What operational source confirms permissive routing, signalling, and 1435mm gauge clearance for any real movement?"
+        },
+        "es": {
+          "summary": "Con la geometría en planta de IGN y CONDITIONS como supuesto hipotético, el motor geográfico halló camino conectado antes y después. Ambos devuelven 473,7 km en 458 tramos (desvíos 4 m/25 m). Los cierres no aplican a esta ejecución, sin aislamiento ni desvío mostrado. No es declaración de explotación, gálibo u horario; movimientos autorizados, señalización y compatibilidad de ancho no verificados.",
+          "question": "¿Qué fuente operativa confirma encaminamiento autorizado, señalización y gálibo para 1435 mm en un movimiento real?"
+        },
+        "sourceIds": [
+          "IGN",
+          "CONDITIONS",
+          "RESULTS"
+        ]
+      },
+      "usage": {
+        "calls": 1,
+        "promptTokens": 1206,
+        "completionTokens": 311,
+        "reservedEstimateUsd": 0.0224825
+      },
+      "elapsedMs": 2572,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    },
+    {
+      "id": "c4c630b2-6117-4629-b027-158dacd3ef1f",
+      "at": "2026-11-01T23:28:01.602Z",
+      "kind": "real_meta_geographic_review",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "scenarioHash": "cb8ecbaea7ef1d912d408bd09f1c5e825ea6764175f817f751f62419677b8d8d",
+      "conditions": {
+        "fromId": "FCEST_N280790000017",
+        "toId": "FCEST_N410910000061",
+        "gauge": "1435",
+        "blocked": [
+          "FFCC_TR130000000032"
+        ]
+      },
+      "sources": [
+        {
+          "id": "IGN",
+          "source": "https://api-features.idee.es/collections/railwaylink",
+          "license": "CC-BY-4.0",
+          "description": "Real IGN cartographic rail links; plan-view endpoint connectivity only. Operational status, permitted turns, signalling and movement authority are not supplied. Distances follow original polylines; no journey-time prediction."
+        },
+        {
+          "id": "CONDITIONS",
+          "from": "Estación de Madrid-P. de Atocha Almudena Grandes",
+          "to": "Estación de Sevilla-Santa Justa",
+          "gauge": "1435",
+          "hypotheticalClosures": [
+            "FFCC_TR130000000032"
+          ],
+          "description": "Closures are user-authored what-if assumptions, not real incidents. All gauges means rolling-stock compatibility has NOT been checked."
+        },
+        {
+          "id": "RESULTS",
+          "baseline": {
+            "feasible": true,
+            "code": "GEOGRAPHIC_PATH",
+            "distanceKm": 473.66038000000015,
+            "edgeCount": 458,
+            "stationOffsetsMetres": [
+              4,
+              25
+            ]
+          },
+          "afterClosures": {
+            "feasible": false,
+            "code": "NO_GEOGRAPHIC_PATH",
+            "distanceKm": null,
+            "edgeCount": 0,
+            "stationOffsetsMetres": [
+              4,
+              25
+            ]
+          },
+          "description": "Computed by independent local geographic graph, not by the language model. No invented detour if no path remains."
+        }
+      ],
+      "proposal": {
+        "en": {
+          "summary": "IGN geometry returns one connected link-chain of about 473.7 km using 458 links (offsets 4 m and 25 m). Under the hypothetical closure FFCC_TR130000000032 the same graph returns no connected path — no alternative geographic detour is present in this data.",
+          "question": "What operational evidence such as working timetable, signalling permissions and gauge/rolling-stock clearance would be needed beyond this geographic result?"
+        },
+        "es": {
+          "summary": "La geometría del IGN devuelve una cadena conectada de unos 473,7 km con 458 enlaces (desplazamientos 4 m y 25 m). Con el cierre hipotético FFCC_TR130000000032 el mismo grafo no devuelve ruta conectada: no hay desvío geográfico alternativo en estos datos.",
+          "question": "¿Qué evidencia operativa, como horario de servicio, permisos de señalización y compatibilidad de ancho/material rodante, se necesitaría más allá de este resultado geográfico?"
+        },
+        "sourceIds": [
+          "IGN",
+          "RESULTS"
+        ]
+      },
+      "usage": {
+        "calls": 1,
+        "promptTokens": 1209,
+        "completionTokens": 259,
+        "reservedEstimateUsd": 0.02251
+      },
+      "elapsedMs": 1543,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    },
+    {
+      "id": "a41783a4-fa84-4fff-bf82-d094b4b6cc75",
+      "at": "2026-11-01T23:40:27.879Z",
+      "kind": "real_meta_geographic_review",
+      "promptVersion": "geographic-review-v2",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "scenarioHash": "fcae3bcd7a2b49449b9f8c67c30c040bb7c8a4d7174595aafad903a0fe0757fe",
+      "conditions": {
+        "fromId": "FCEST_N280790000017",
+        "toId": "FCEST_N410910000061",
+        "gauge": "1435",
+        "blocked": []
+      },
+      "sources": [
+        {
+          "id": "IGN",
+          "source": "https://api-features.idee.es/collections/railwaylink",
+          "license": "CC-BY-4.0",
+          "description": "Real IGN cartographic rail links; plan-view endpoint connectivity only. Operational status, permitted turns, signalling and movement authority are not supplied. Distances follow original polylines; no journey-time prediction."
+        },
+        {
+          "id": "CONDITIONS",
+          "from": "Estación de Madrid-P. de Atocha Almudena Grandes",
+          "to": "Estación de Sevilla-Santa Justa",
+          "gauge": "1435",
+          "hypotheticalClosures": [],
+          "description": "Closures are user-authored what-if assumptions, not real incidents. All gauges means rolling-stock compatibility has NOT been checked."
+        },
+        {
+          "id": "RESULTS",
+          "baseline": {
+            "feasible": true,
+            "code": "GEOGRAPHIC_PATH",
+            "distanceKm": 473.66038000000015,
+            "edgeCount": 458,
+            "stationOffsetsMetres": [
+              4,
+              25
+            ]
+          },
+          "afterClosures": {
+            "feasible": true,
+            "code": "GEOGRAPHIC_PATH",
+            "distanceKm": 473.66038000000015,
+            "edgeCount": 458,
+            "stationOffsetsMetres": [
+              4,
+              25
+            ]
+          },
+          "description": "Computed by independent local geographic graph, not by the language model. No invented detour if no path remains."
+        }
+      ],
+      "proposal": {
+        "en": {
+          "summary": "The local graph finds the geographic connection between Madrid-P. de Atocha Almudena Grandes and Sevilla-Santa Justa is about 473.7 km using its linked shapes, with the endpoints mapping very close to the stations. Because no hypothetical closure was applied, the same plan-view linkage is returned before and after.",
+          "question": "No operational evidence is supplied for this geographic match, so what infrastructure, gauge or operating authority would you verify before treating it as usable?"
+        },
+        "es": {
+          "summary": "El grafo local encuentra la conexión geográfica entre Madrid-P. de Atocha Almudena Grandes y Sevilla-Santa Justa de unos 473,7 km usando sus trazados vinculados, con los extremos muy próximos a las estaciones. Al no aplicarse ningún cierre hipotético, se devuelve el mismo enlace en vista en planta antes y después.",
+          "question": "Esta coincidencia geográfica no aporta evidencia operativa, ¿qué infraestructura, ancho de vía o autorización de circulación verificarías antes de considerarla utilizable?"
+        },
+        "sourceIds": [
+          "IGN",
+          "RESULTS"
+        ]
+      },
+      "usage": {
+        "calls": 1,
+        "promptTokens": 1267,
+        "completionTokens": 263,
+        "reservedEstimateUsd": 0.0232825
+      },
+      "elapsedMs": 1642,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    },
+    {
+      "id": "22aaafd2-f66f-4f1a-a87d-0c2ae0ec4515",
+      "at": "2026-11-01T23:41:09.068Z",
+      "kind": "real_meta_geographic_review",
+      "promptVersion": "geographic-review-v2",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "scenarioHash": "cb8ecbaea7ef1d912d408bd09f1c5e825ea6764175f817f751f62419677b8d8d",
+      "conditions": {
+        "fromId": "FCEST_N280790000017",
+        "toId": "FCEST_N410910000061",
+        "gauge": "1435",
+        "blocked": [
+          "FFCC_TR130000000032"
+        ]
+      },
+      "sources": [
+        {
+          "id": "IGN",
+          "source": "https://api-features.idee.es/collections/railwaylink",
+          "license": "CC-BY-4.0",
+          "description": "Real IGN cartographic rail links; plan-view endpoint connectivity only. Operational status, permitted turns, signalling and movement authority are not supplied. Distances follow original polylines; no journey-time prediction."
+        },
+        {
+          "id": "CONDITIONS",
+          "from": "Estación de Madrid-P. de Atocha Almudena Grandes",
+          "to": "Estación de Sevilla-Santa Justa",
+          "gauge": "1435",
+          "hypotheticalClosures": [
+            "FFCC_TR130000000032"
+          ],
+          "description": "Closures are user-authored what-if assumptions, not real incidents. All gauges means rolling-stock compatibility has NOT been checked."
+        },
+        {
+          "id": "RESULTS",
+          "baseline": {
+            "feasible": true,
+            "code": "GEOGRAPHIC_PATH",
+            "distanceKm": 473.66038000000015,
+            "edgeCount": 458,
+            "stationOffsetsMetres": [
+              4,
+              25
+            ]
+          },
+          "afterClosures": {
+            "feasible": false,
+            "code": "NO_GEOGRAPHIC_PATH",
+            "distanceKm": null,
+            "edgeCount": 0,
+            "stationOffsetsMetres": [
+              4,
+              25
+            ]
+          },
+          "description": "Computed by independent local geographic graph, not by the language model. No invented detour if no path remains."
+        }
+      ],
+      "proposal": {
+        "en": {
+          "summary": "With the requested line closed, the local map shows the rail network between Madrid Atocha and Sevilla Santa Justa as disconnected, while normally there is a continuous mapped link of about 474 km. Any through route would require additional mapping, evidence of permission to operate, and alternative transport planning.",
+          "question": "What official confirmation of line availability and permitted alternative routes would you need before relying on this corridor?"
+        },
+        "es": {
+          "summary": "Con el cierre solicitado, el mapa local muestra la red ferroviaria entre Madrid Atocha y Sevilla Santa Justa desconectada, mientras que normalmente existe un trazado continuo de unos 474 km. Cualquier trayecto necesitaría cartografía adicional, prueba de permiso para circular y planificación alternativa.",
+          "question": "¿Qué confirmación oficial de disponibilidad de la línea y de rutas alternativas permitidas necesitarías antes de contar con este corredor?"
+        },
+        "sourceIds": [
+          "IGN",
+          "CONDITIONS",
+          "RESULTS"
+        ]
+      },
+      "usage": {
+        "calls": 1,
+        "promptTokens": 1270,
+        "completionTokens": 239,
+        "reservedEstimateUsd": 0.02331
+      },
+      "elapsedMs": 1591,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="SWITCH. Un ensayo antes de la decisión. Una historia nacida en España y un laboratorio con Meta para explorar alternativas cuando cambia la evidencia.">
+  <title>SWITCH · Before the next move</title>
+  <link rel="icon" href="data:,">
+  <link rel="preload" href="/assets/hanken-grotesk.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/app.css">
+  <link rel="stylesheet" href="/story.css">
+  <link rel="stylesheet" href="/world.css">
+  <script type="module" src="/app.js"></script>
+  <script type="module" src="/shell.js"></script>
+  <script type="module" src="/workspace.js"></script>
+  <link rel="stylesheet" href="/network.css">
+  <link rel="stylesheet" href="/experience.css">
+  <link rel="stylesheet" href="/workspace.css"><link rel="stylesheet" href="/console.css">
+  <script type="module" src="/network.js"></script>
+  <script type="module" src="/network-copilot.js"></script>
+</head>
+<body class="workspace-page" data-workspace-view="lab">
+<header class="workspace-header"><a class="brand" href="/" aria-label="SWITCH inicio"><svg viewBox="0 0 38 38" width="27" height="27" aria-hidden="true"><path d="M7 31V7M31 31V7M7 31C7 18 31 20 31 7" fill="none" stroke="currentColor" stroke-width="3.5"/></svg><span>SWITCH</span></a><span class="workspace-wordmark">ESPACIO DE TRABAJO</span><nav class="workspace-tabs" aria-label="Vistas del espacio de trabajo"><a href="#lab" data-workspace-view="lab">Simulador 3D</a><a href="#network" data-workspace-view="network">Red real</a></nav><div class="nav-tools"><a href="/" class="back-story">La historia ↗</a><div class="language-switch" role="group" aria-label="Idioma"><button data-language="en" aria-label="English" aria-pressed="true">EN</button><button data-language="es" aria-label="Español" aria-pressed="false">ES</button></div><button class="theme-toggle" data-theme-toggle aria-label="Activar modo oscuro">Oscuro ◐</button></div></header><main>    <section id="lab" class="laboratory" aria-label="Simulador interactivo de SWITCH">
+  <header class="masthead">
+    <a class="brand" href="/" aria-label="SWITCH inicio">
+      <svg viewBox="0 0 38 38" width="35" height="35" aria-hidden="true"><path d="M7 31V7M31 31V7M7 31C7 18 31 20 31 7" fill="none" stroke="currentColor" stroke-width="3.5"/></svg>
+      <span>SWITCH</span>
+    </a>
+    <span class="product-name">Laboratorio de decisiones</span>
+    <div class="lab-tools"><div class="language-switch" role="group" aria-label="Idioma"><button data-language="en" aria-pressed="true" aria-label="English">EN</button><button data-language="es" aria-pressed="false" aria-label="Español">ES</button></div><button class="theme-toggle lab-theme" data-theme-toggle aria-label="Activar modo oscuro">Oscuro <span aria-hidden="true">◐</span></button></div>
+    <nav aria-label="Controles del laboratorio">
+      <span id="provider-state" class="provider-state">Comprobando conexión</span>
+      <a class="quiet origin-link" href="/#origin">Por qué existe</a>
+      <button id="history-button" class="quiet">Ensayos <span id="branch-count">0</span></button>
+      <button id="about-button" class="quiet icon-button" aria-label="Sobre este laboratorio">i</button>
+    </nav>
+  </header>
+
+  <section class="workspace-intro"><div><p class="chapter-label">LABORATORIO DE DECISIONES / META</p><h1>Observa. Contrasta.<br>Ensaya otra decisión.</h1><p>Tres trenes, avisos que cambian y alternativas que se comprueban. Cada decisión conserva sus fuentes.</p></div><button id="start-guided" class="guided-start">Empezar un caso guiado <span aria-hidden="true">↗</span></button></section><section class="mission-selector" id="mission-selector" aria-label="Elegir una misión"></section>
+  <div id="app" aria-busy="true">
+    <div class="purpose-line"><p>Un simulador para practicar decisiones ferroviarias con información incompleta.</p><span>Entrenamiento con casos ficticios</span></div>
+    <section class="case-bar" aria-label="Seleccionar caso de entrenamiento">
+      <label for="case-select">Caso <span id="case-number">01</span></label>
+      <select id="case-select" aria-label="Caso de entrenamiento"></select>
+      <ol class="journey" aria-label="Cómo funciona"><li id="step-read"><b>1</b> Lee los avisos</li><li id="step-meta"><b>2</b> Contrasta con Meta</li><li id="step-try"><b>3</b> Ensaya y compara</li></ol>
+    </section>
+    <section class="evidence-update" id="evidence-update" aria-labelledby="update-title" hidden>
+      <div><span class="update-kicker" id="update-kicker">Evidencia / versión 01</span><h2 id="update-title">¿Y si llega otro aviso?</h2><p id="update-description">Primero ensaya una respuesta. Después recibe el parte que cambia las condiciones de ese mismo caso.</p></div>
+      <button class="update-button" id="notice-button">Recibir aviso de mantenimiento <span aria-hidden="true">↙</span></button>
+      <p id="update-status" role="status" aria-live="polite"></p>
+    </section>
+    <div class="historical-banner" id="historical-banner" role="status" hidden></div>
+    <section class="stage" id="stage" aria-label="Escenario ferroviario">
+      <div class="network-pane">
+        <div class="scene-heading">
+          <div class="scenario-tag"><span class="scenario-dot"></span> <span id="scenario-name">Corredor norte · Caso ficticio</span></div>
+          <h2 id="scene-title" tabindex="-1">¿Puede seguir<br>este tren?</h2>
+          <p id="scene-description">Un aviso dice que el tramo está libre. Falta la confirmación.</p>
+        </div>
+        <div class="scene-clock"><span>Tiempo del escenario</span><strong id="scene-clock">08:17</strong></div>
+        <div class="scene-view-switch" role="group" aria-label="Visualización"><button id="view-3d" aria-pressed="true">Vista 3D</button><button id="view-2d" aria-pressed="false">Mapa 2D</button></div>
+        <div id="world3d" class="world3d" aria-label="Simulador espacial 3D del ejercicio ficticio"></div>
+        <div class="world-toolbar" id="world-toolbar"><div class="world-camera-controls"><button data-camera="overview">Vista general</button><button data-camera="R2">R2</button><button data-camera="top">Desde arriba</button><button data-camera="follow">Seguir T12</button><button id="workspace-focus">Ampliar modelo</button></div><button id="previous-plan" aria-pressed="false" hidden>Mostrar plan anterior</button><div class="world-playback"><button id="world-play">Reproducir rama</button><input id="world-time" type="range" min="0" max="12" step="0.01" value="0" aria-label="Tiempo del modelo 3D" disabled><output id="world-elapsed">+00:00</output><button id="world-zoom-out" aria-label="Alejar cámara">−</button><button id="world-zoom-in" aria-label="Acercar cámara">+</button></div></div>
+        <div class="world-context" id="world-context"><span class="world-drag">Gira para explorar</span><span id="previous-plan-caption" hidden>Plan anterior · evidencia v1</span></div>
+        <div class="diagram-wrap" hidden>
+          <svg id="exercise-network" viewBox="0 0 1240 640" role="img" aria-labelledby="fictional-network-title network-description">
+            <title id="fictional-network-title">Corredor norte, red ficticia de cinco estaciones</title>
+            <desc id="network-description">Costa, Valle, Central y Norte conectadas por la línea principal. Ladera ofrece un desvío entre Valle y Central. Tres trenes forman parte del ensayo.</desc>
+            <defs>
+              <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill="#CDD4DB"/></pattern>
+              <pattern id="hatch" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="11" stroke="#cc3434" stroke-width="2" opacity=".14"/></pattern>
+              <filter id="train-shadow" x="-60%" y="-100%" width="220%" height="300%"><feDropShadow dx="0" dy="9" stdDeviation="8" flood-color="#24374A" flood-opacity=".19"/></filter>
+              <filter id="track-shadow" x="-10%" y="-50%" width="120%" height="200%"><feDropShadow dx="0" dy="9" stdDeviation="5" flood-color="#A3ADB9" flood-opacity=".23"/></filter>
+            </defs>
+            <rect class="dot-field" x="35" y="210" width="1170" height="340" fill="url(#dots)"/>
+            <g id="uncertainty-zone" class="uncertainty-zone" opacity="0">
+              <rect x="401" y="308" width="468" height="94" rx="47" fill="url(#hatch)"/>
+              <path d="M420 303H850M420 407H850" stroke="#cc3434" stroke-width="1.5" stroke-dasharray="4 7" opacity=".6"/>
+            </g>
+            <g class="track-foundations" filter="url(#track-shadow)">
+              <path d="M130 355H1110M420 355L635 170L850 355" fill="none" stroke="#DCE2E8" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M130 355H1110M420 355L635 170L850 355" fill="none" stroke="#FBFCFD" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <g id="edges"></g>
+            <g id="edge-labels"></g>
+            <g id="stations"></g>
+            <g id="train-positions"></g>
+          </svg>
+        </div>
+        <div class="scene-bottom">
+          <p class="scene-key"><span class="key-line"></span> Tramo del escenario <span class="key-unknown"></span> Información sin confirmar</p>
+          <button id="incident-button" class="primary">Empezar este caso <span aria-hidden="true">↗</span></button>
+          <button id="focus-button" class="text-action" hidden>Ver red completa</button>
+        </div>
+        <div id="rejection" class="rejection" role="status" hidden></div>
+        <p id="movement-caption" class="movement-caption" hidden></p>
+      </div>
+
+      <aside class="inspector" id="inspector" aria-label="Incidencia y lectura de Meta" hidden>
+        <div class="incident-kicker"><span class="amber-dot"></span><span id="incident-label">R2 · Confirmación pendiente</span></div>
+        <h2 id="analysis-title">Falta una confirmación.</h2>
+        <details class="reading-detail" id="reading-detail" open>
+          <summary id="reading-summary">Qué ha cambiado</summary>
+          <p id="analysis-summary">La última posición tiene tres minutos. Un mensaje da el tramo por libre; otro dice que la comprobación sigue pendiente.</p>
+        </details>
+        <button id="sources-button" class="text-action">Leer los avisos <span aria-hidden="true">↗</span></button>
+        <div class="question-area">
+          <span id="question-owner">Pregunta del escenario</span>
+          <p id="analysis-question">¿Existe una confirmación reciente de que T07 ha abandonado R2?</p>
+        </div>
+        <button id="meta-button" class="meta-button">Contrastar con Meta <span aria-hidden="true">↗</span></button>
+        <button id="cancel-button" class="quiet" hidden>Cancelar consulta</button>
+        <p id="meta-status" class="meta-status">Solo se envían los datos ficticios de este escenario.</p>
+        <div class="inspector-foot">
+          <button id="compare-button" class="text-action">Comparar respuestas <span aria-hidden="true">↓</span></button>
+          <button id="shortcut-button" class="negative-test">Probar acceso sin confirmar</button>
+        </div>
+      </aside>
+    </section>
+
+<section class="operations-board" id="operations-board" aria-label="Ocupación de tramos del ensayo"><div class="operations-heading"><div><span class="chapter-label">EL MOTOR, A LA VISTA</span><h2>Quién ocupa cada tramo.</h2><p>La posición 3D y estas reservas usan el mismo reloj y el mismo ensayo.</p></div><div class="operations-assumptions"><span id="occupancy-scope"></span><button id="adjust-assumptions">Ajustar hipótesis</button></div></div><div class="operations-layout"><div class="occupancy-chart" id="occupancy-chart"></div><aside class="evidence-board"><h3>Lo que sabemos.</h3><div id="evidence-board"></div></aside></div></section>
+    <section class="agent-work" id="agent-work" aria-labelledby="agent-title" hidden>
+      <div class="agent-heading"><div><span class="local-engine-label" id="agent-origin">Meta / herramientas</span><h2 id="agent-title">Leer. Probar. Volver a decidir.</h2></div><button class="quiet" id="agent-trace-button">Ver fuentes y comprobaciones ↗</button></div>
+      <p class="agent-summary" id="agent-summary">Meta consulta los partes y solicita los ensayos al motor. La respuesta conserva las fuentes y los resultados de cada alternativa.</p>
+      <ol class="agent-tests" id="agent-tests"></ol>
+      <div class="agent-verdict" id="agent-verdict" hidden><p id="agent-question"></p><button class="text-action" id="agent-rehearse">Ensayar la alternativa propuesta ↗</button></div>
+      <p class="agent-proof" id="agent-proof"></p>
+    </section>
+    <section id="comparison" class="comparison" aria-labelledby="comparison-title" hidden>
+      <div class="comparison-heading">
+        <div><span class="local-engine-label">Rutas calculadas con las reglas de este ejercicio</span><h2 id="comparison-title">¿Qué cambia si decides otra cosa?</h2></div>
+        <button id="close-comparison" class="quiet">Cerrar comparación</button>
+      </div>
+      <div class="assumptions">
+        <label for="clearance" id="clearance-label">Hipótesis: confirmación de R2 libre en <output id="clearance-value">4</output> min</label>
+        <input id="clearance" type="range" min="1" max="12" value="4">
+        <label class="bypass-control"><input id="bypass-open" type="checkbox" checked> Desvío por Ladera disponible</label>
+        <p id="assumption-note">Tú eliges cuándo llegará la confirmación en esta rama. El modelo no predice ese momento.</p>
+      </div>
+      <div id="plans" class="plans"></div>
+    </section>
+
+    <section class="transport" aria-label="Tiempo y reproducción de la rama">
+      <button id="rewind-button" class="rewind" aria-label="Volver a antes de la incidencia"><span aria-hidden="true">↶</span></button>
+      <button id="play-button" class="play" aria-label="Reproducir rama" disabled><span aria-hidden="true">▶</span></button>
+      <div class="playback-title"><strong id="playback-title">Antes de la incidencia</strong><span id="playback-description">Introduce una incidencia para empezar.</span></div>
+      <div class="time-track">
+        <div class="time-labels"><span id="timeline-start">08:17</span><span id="timeline-end">Sin rama seleccionada</span></div>
+        <input id="timeline" type="range" aria-label="Tiempo de la rama" min="0" max="12" step="0.01" value="0" disabled>
+        <div id="timeline-events" class="timeline-events"></div>
+      </div>
+      <output id="elapsed" class="elapsed">+00:00</output>
+    </section>
+    <footer class="lab-footer"><span>Entrenamiento ficticio · Sin conexión al control de trenes.</span><a id="export-link" href="/api/export" download="switch-rehearsals.json" hidden>Exportar ensayos y fuentes ↗</a><span id="save-status">Guardado en este Mac</span></footer>
+    <p id="notice" class="notice" role="status" aria-live="polite" hidden></p>
+  </div>
+    </section>
+    <section class="national-section" id="network" aria-labelledby="network-title">
+      <div class="national-heading"><div><p class="chapter-label" data-network-copy="chapter">02 / La red real</p><h2 id="network-title" data-network-copy="title">España. Conectada por ferrocarril.</h2><p data-network-copy="lead">Explora las vías reales, consulta posiciones publicadas y compara qué cambia al cerrar un tramo en tu escenario.</p></div><a href="/simulator#lab" class="national-lab-link"><span data-network-copy="localExercise">Abrir el ejercicio 3D con Meta</span> ↗</a></div>
+      <div class="national-toolbar"><div class="national-stat"><strong id="network-link-count">—</strong><span data-network-copy="tracks">tramos IGN</span></div><div class="national-stat"><strong id="network-station-count">—</strong><span data-network-copy="stations">estaciones</span></div><div class="national-stat"><strong id="network-vehicle-count">—</strong><span data-network-copy="reported">posiciones Renfe publicadas</span></div><div class="live-freshness"><span class="live-dot"></span><strong id="network-recent-count">—</strong><span id="network-recent-label">fechas recientes</span></div><div class="national-refresh"><span id="network-countdown" aria-hidden="true"></span><button id="network-focus" aria-pressed="false">Ampliar espacio ↗</button><span id="network-live-status" role="status"></span><button id="network-refresh" data-network-copy="refresh">Actualizar datos</button></div></div>
+      <div class="national-workspace">
+        <div class="national-map-shell"><div id="national-map" class="national-map" aria-label="Mapa interactivo de vías y posiciones ferroviarias reales de España"><p class="network-loading" id="network-loading" data-network-copy="loading">Cargando cartografía oficial…</p></div>
+          <div class="national-map-top"><span class="map-mode" data-network-copy="mapMode">GEOMETRÍA REAL / OBSERVACIÓN</span><div><button id="network-mainland" data-network-copy="mainland">Península</button><button id="network-all" data-network-copy="allSpain">Toda España</button><button id="network-pick-live" disabled>Seguir un tren</button><button id="network-fit-vehicles" data-network-copy="fitVehicles" disabled>Ver posiciones</button></div></div>
+          <div class="network-preview" id="network-preview" hidden><span id="network-preview-caption"></span><button id="network-keep-preview" data-copilot-copy="keep">Conservar como hipótesis</button><button id="network-dismiss-preview" data-copilot-copy="returnMap">Volver al mapa</button></div><div class="national-map-bottom"><span data-network-copy="mapHint">Arrastra · Doble clic para acercar · Selecciona un tren o una vía</span><div><button id="network-zoom-out" aria-label="Alejar mapa">−</button><button id="network-zoom-in" aria-label="Acercar mapa">+</button></div></div>
+          <div class="national-legend"><span class="legend-track" data-network-copy="geometry">Cartografía</span><span class="legend-standard" data-network-copy="standardGauge">1.435 mm</span><span class="legend-observed" data-network-copy="position">Posición publicada</span><span class="legend-stale" data-network-copy="oldPosition">Dato antiguo</span><span class="legend-path" data-network-copy="geographicPath">Ruta geográfica</span><span class="legend-closed" data-network-copy="hypotheticalClosure">Cierre hipotético</span></div>
+        </div>
+        <aside class="national-inspector"><div class="console-nav" role="tablist" aria-label="Herramientas de la red"><button data-console-panel="trains" role="tab" aria-selected="true" aria-controls="fleet-panel">Trenes</button><button data-console-panel="meta" role="tab" aria-selected="false" aria-controls="network-copilot">Meta</button><button data-console-panel="route" role="tab" aria-selected="false" aria-controls="route-pane">Escenario</button></div><section id="fleet-panel" class="fleet-panel" aria-labelledby="fleet-title"><div class="fleet-heading"><span class="national-panel-kicker" id="fleet-kicker">POSICIONES PUBLICADAS / RENFE</span><h3 id="fleet-title">Encuentra tu tren.</h3></div><label for="fleet-search" id="fleet-search-label">Buscar por tren o parada publicada</label><input id="fleet-search" type="search" autocomplete="off" maxlength="100" placeholder="AVE, Alvia, número…"><div class="fleet-filters" role="group" aria-label="Filtrar la lista de trenes"><button data-fleet-filter="all" aria-pressed="true">Todos</button><button data-fleet-filter="watched" aria-pressed="false">Guardados</button><button data-fleet-filter="older" aria-pressed="false">Revisar fecha</button></div><div class="fleet-source" role="group" aria-label="Origen de las posiciones"><button data-fleet-source="live" aria-pressed="true">Feed actual</button><button data-fleet-source="recorded" aria-pressed="false">Observación guardada</button></div><label for="fleet-service" id="fleet-service-label">Servicio</label><select id="fleet-service"><option value="all">Todos los servicios</option><option value="commuter">Cercanías / Rodalies</option><option value="long-distance">AV / LD / MD</option></select><p id="fleet-summary" class="fleet-summary" role="status"></p><div id="fleet-selection" class="fleet-selection" hidden></div><div id="fleet-list" class="fleet-list"></div></section>
+<details id="route-pane" class="route-disclosure"><summary id="route-disclosure-title">Ensayar un recorrido geográfico</summary><div class="route-disclosure-body"><p class="national-panel-kicker" data-network-copy="sandbox">ENSAYO GEOGRÁFICO / SIN CAMBIOS REALES</p><h3 data-network-copy="routeTitle">¿Qué conecta estos lugares?</h3>
+          <label for="network-from" data-network-copy="from">Origen</label><input id="network-from" list="network-stations" autocomplete="off" placeholder="Madrid Atocha"><label for="network-to" data-network-copy="to">Destino</label><input id="network-to" list="network-stations" autocomplete="off" placeholder="Sevilla Santa Justa"><datalist id="network-stations"></datalist>
+          <label for="network-gauge" data-network-copy="gauge">Ancho de vía</label><select id="network-gauge"><option value="1435">1.435 mm</option><option value="1668">1.668 mm</option><option value="1000">1.000 mm</option><option value="all" data-network-copy="allGauges">Todos · compatibilidad no comprobada</option></select>
+          <button class="national-primary" id="network-route" data-network-copy="calculate">Calcular recorrido geográfico</button>
+          <div id="network-route-result" class="national-result" aria-live="polite"></div>
+          <div class="national-closure-actions"><button id="network-close-route" data-network-copy="closeSection" disabled>Cerrar un tramo del recorrido</button><button id="network-clear-closures" data-network-copy="clearClosures" hidden>Quitar cierres del ensayo</button></div>
+          </div></details><section class="network-copilot" id="network-copilot" data-ready="false"><p class="copilot-eyebrow">META / MUSE SPARK OPEN</p><h3 data-copilot-copy="title">Pregunta a SWITCH</h3><ol class="copilot-contract"><li><b>01</b><span data-copilot-copy="readStep">Leer fuentes</span></li><li><b>02</b><span data-copilot-copy="testStep">Probar alternativas</span></li><li><b>03</b><span data-copilot-copy="alertStep">Preparar una alerta</span></li></ol><div class="meta-explainer"><p id="meta-explainer-title">De un mapa a una pregunta comprobable.</p><p id="meta-explainer-body">Meta recibe las fuentes y pide al motor que compruebe alternativas. Verás las herramientas ejecutadas y los resultados en los que se basa su propuesta.</p></div><p class="copilot-idle" data-copilot-copy="idle">El mapa se actualiza por su cuenta. La IA espera a que le preguntes.</p><label for="copilot-question" data-copilot-copy="questionLabel">¿Qué quieres explorar?</label><textarea id="copilot-question" maxlength="350" rows="3"></textarea><div class="copilot-suggestions"><button data-copilot-suggestion="closure" data-copilot-copy="closureChip">Probar un cierre</button><button data-copilot-suggestion="stale" data-copilot-copy="staleChip">Detectar datos antiguos</button></div><button id="copilot-ask" data-copilot-copy="ask" disabled>Explorar con Meta ↗</button><button id="copilot-cancel" data-copilot-copy="cancel" hidden>Cancelar</button><div id="copilot-status" role="status" aria-live="polite"></div><ol id="copilot-progress"></ol><div id="copilot-result" hidden><div id="copilot-result-kind" class="copilot-result-kind"></div><p id="copilot-source-scope" class="copilot-source-scope"></p><h4 id="copilot-title"></h4><p id="copilot-summary"></p><div id="copilot-tests"></div><section id="copilot-alert" class="copilot-alert" hidden><span class="alert-kicker" data-copilot-copy="alertKicker">META / ALERTA DEL ENSAYO</span><h5 id="copilot-alert-title"></h5><p id="copilot-alert-message"></p><p id="copilot-alert-action"></p><button id="copilot-alert-review" data-copilot-copy="reviewAlert">Marcar como revisada</button><span id="copilot-alert-state" role="status"></span></section><p id="copilot-next-question"></p><button id="copilot-preview" data-copilot-copy="preview">Ver en el mapa</button><small id="copilot-provenance"></small><details><summary data-copilot-copy="sources">Fuentes y herramientas</summary><pre id="copilot-receipt" data-original></pre></details></div><div id="copilot-recordings"></div></section>
+          <details class="national-observations" hidden><summary data-network-copy="chooseTrain">Seleccionar una posición publicada</summary><div id="network-vehicles"></div></details>
+          <section id="network-pick" class="national-pick" hidden></section>
+          <details id="network-meta" class="network-meta" hidden><summary data-network-copy="previousReview">Revisión anterior con fuentes</summary><span data-network-copy="metaScope">Meta / revisión de resultados geográficos</span><p id="network-meta-text"></p><p id="network-meta-question"></p><small id="network-meta-provenance"></small><details id="network-meta-evidence" hidden><summary>Sources / Fuentes</summary><pre id="network-meta-record"></pre></details><button id="network-meta-button" data-network-copy="metaReview">Pedir revisión a Meta</button></details>
+          <p class="national-scope" data-network-copy="scope">La geometría no acredita una vía abierta ni un servicio disponible. No se conocen aquí señalización, ocupación o movimientos autorizados.</p>
+          <details class="national-data-details"><summary data-network-copy="dataDetails">Fuentes, cobertura y método</summary><div id="network-feed-details"></div><p data-network-copy="topology">El grafo enlaza extremos cartográficos coincidentes en planta. Conserva la geometría y muestra el ajuste de estación, pero no modela permisos de paso ni compatibilidad completa del tren.</p><p>Obra derivada de IGR-RT 2026 · <a href="https://datos.gob.es/es/catalogo/e0dat0002-redes-de-transporte-de-espana1" target="_blank" rel="noreferrer">CC BY 4.0 scne.es</a><br>Origen de los datos: Renfe Operadora · <a href="https://data.renfe.com/dataset/ubicacion-vehiculos" target="_blank" rel="noreferrer">CC BY 4.0</a></p></details>
+        </aside>
+      </div>
+    </section>
+
+</main>  <dialog id="detail-dialog" aria-labelledby="detail-title">
+    <form method="dialog"><button class="dialog-close" aria-label="Cerrar detalle">×</button></form>
+    <div id="detail-content"></div>
+  </dialog>
+
+</body></html>

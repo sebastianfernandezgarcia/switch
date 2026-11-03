@@ -1,0 +1,200 @@
+{
+  "asOf": "2026-11-02",
+  "format": "switch-incident-context-v1",
+  "corridorLabel": "Madrid–Andalucía",
+  "lineLabel": "LAV010 Madrid–Sevilla",
+  "interval": {
+    "from": "2026-01-18",
+    "to": "2026-10-28",
+    "months": 9,
+    "additionalDays": 10,
+    "days": 283
+  },
+  "fatalitiesTotal": 115,
+  "fatalitiesTotalBasis": "Author arithmetic46 + 69 from separate dated official balances; not an official combined accident count.",
+  "injuredTotal": null,
+  "injuredSummary": "Hundreds injured",
+  "injuredSummaryEs": "Cientos de personas heridas",
+  "incidents": [
+    {
+      "id": "adamuz",
+      "name": "Adamuz",
+      "date": "2026-01-18",
+      "fatalities": 46,
+      "fatalitiesAsOf": "2026-05-12",
+      "lon": -4.5651659,
+      "lat": 38.0086999,
+      "precisionLabel": "Approximate accident area from official chainage",
+      "precisionLabelEs": "Zona aproximada del accidente a partir del punto kilométrico",
+      "precisionMetres": null,
+      "displayRadiusMetres": 500,
+      "precisionNote": "The 500 m circle is an editorial area locator, not a surveyed perimeter or statistical confidence bound. Coordinates are inferred along the published IGN geometry, not taken from the municipal centre.",
+      "sourceUrl": "https://www.juntadeandalucia.es/boja/2026/89/c02/1",
+      "sourceId": "adamuz-fatalities-boja",
+      "kilometrePoint": 318.693,
+      "kilometrePointLabel": "318+693",
+      "locationSourceId": "adamuz-location-ministry",
+      "injured": {
+        "value": 123,
+        "operator": "exact",
+        "label": "123 reported injured",
+        "labelEs": "123 personas heridas según el BOE",
+        "asOf": "2026-01-28",
+        "sourceId": "adamuz-injured-boe",
+        "scope": "Count in the dated BOE statement; not a current hospital census or a harmonized final injury register."
+      },
+      "locationMeaning": "Approximate initial derailment area. The 19 January Ministry note places the subsequent collision at about PK 318+200; do not label this marker as the exact impact point.",
+      "additionalKilometrePoints": [
+        {
+          "value": 318.2,
+          "label": "Approximately 318+200",
+          "meaning": "Subsequent collision in the 19 January Ministry statement"
+        }
+      ]
+    },
+    {
+      "id": "urda",
+      "name": "Urda",
+      "date": "2026-10-28",
+      "fatalities": 69,
+      "fatalitiesAsOf": "2026-11-01",
+      "lon": -3.8173342,
+      "lat": 39.4296757,
+      "precisionLabel": "Approximate accident area from official chainage",
+      "precisionLabelEs": "Zona aproximada del accidente a partir del punto kilométrico",
+      "precisionMetres": null,
+      "displayRadiusMetres": 500,
+      "precisionNote": "The 500 m circle is an editorial area locator, not a surveyed perimeter or statistical confidence bound. Coordinates are inferred along the published IGN geometry, not taken from the municipal centre.",
+      "sourceUrl": "https://112.castillalamancha.es/112/comunicacion/el-numero-de-personas-ingresadas-en-hospitales-de-la-comunidad-por-el-accidente-de",
+      "sourceId": "urda-balance-clm112",
+      "kilometrePoint": 118.8,
+      "kilometrePointLabel": "118+800",
+      "locationSourceId": "urda-location-aitat",
+      "injured": {
+        "value": 200,
+        "operator": "more_than",
+        "label": "More than 200 injured",
+        "labelEs": "Más de 200 personas heridas",
+        "asOf": "2026-10-29",
+        "sourceId": "urda-location-aitat",
+        "scope": "Provisional all-incident injury balance reported by AITAT after the first 24 hours, not the 110 regional admissions subset."
+      },
+      "hospitalAdmissions": {
+        "value": 110,
+        "asOf": "2026-11-01",
+        "scope": "Initial admissions to Castilla-La Mancha hospitals only",
+        "remainingAdmitted": 31,
+        "sourceId": "urda-balance-clm112"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "adamuz-fatalities-boja",
+      "title": "BOJA, Decreto-ley 8/2026 de ayudas a víctimas de Adamuz",
+      "url": "https://www.juntadeandalucia.es/boja/2026/89/c02/1",
+      "publishedAt": "2026-05-12",
+      "primaryAuthor": "Junta de Andalucía",
+      "supports": [
+        "2026-01-18 Adamuz accident",
+        "46 fatalities",
+        "more than one hundred injured"
+      ],
+      "shortQuote": "han fallecido 46 personas"
+    },
+    {
+      "id": "adamuz-injured-boe",
+      "title": "BOE-A-2026-2023, Real Decreto-ley 1/2026",
+      "url": "https://boe.es/buscar/doc.php?id=BOE-A-2026-2023",
+      "publishedAt": "2026-01-28",
+      "primaryAuthor": "Jefatura del Estado / Gobierno de España",
+      "supports": [
+        "123 injured persons in the dated legal statement"
+      ],
+      "shortQuote": "123 personas heridas"
+    },
+    {
+      "id": "urda-balance-clm112",
+      "title": "Balance PLATECAM de personas ingresadas, 1 de noviembre de 2026",
+      "url": "https://112.castillalamancha.es/112/comunicacion/el-numero-de-personas-ingresadas-en-hospitales-de-la-comunidad-por-el-accidente-de",
+      "publishedAt": "2026-11-01",
+      "primaryAuthor": "Gobierno de Castilla-La Mancha / 112",
+      "supports": [
+        "69 fatalities",
+        "110 people initially admitted in regional hospitals",
+        "31 remained admitted in Castilla-La Mancha on 1 November"
+      ],
+      "shortQuote": "El Centro Integrado de Datos mantiene el número de fallecidos en el siniestro en 69."
+    },
+    {
+      "id": "urda-location-aitat",
+      "title": "AITAT, información disponible tras las primeras 24 horas del accidente de Urda",
+      "url": "https://www.transportes.gob.es/recursos_mfom/nota_accidente_urda_1_-_informacion_disponible_en_primeras_24_horas.pdf",
+      "archiveUrl": "https://web.archive.org/web/20261029221541id_/https://www.transportes.gob.es/recursos_mfom/nota_accidente_urda_1_-_informacion_disponible_en_primeras_24_horas.pdf",
+      "publishedAt": "2026-10-29",
+      "primaryAuthor": "AITAT",
+      "supports": [
+        "28 October 2026, 08:53",
+        "PK 118+800, track 2 of line 010 Madrid–Sevilla",
+        "69 fatalities and more than 200 injured, provisional dated balance"
+      ],
+      "shortQuote": "PK 118+800 de la vía 2"
+    },
+    {
+      "id": "adamuz-location-ministry",
+      "title": "Comunicado del Ministerio de Transportes y Movilidad Sostenible, 19 de enero de 2026",
+      "url": "https://vialibre-ffe.com/pdf/-accidente-adamuz-ComunicadoMinisterioTransportes.pdf",
+      "publishedAt": "2026-01-19",
+      "primaryAuthor": "Ministerio de Transportes y Movilidad Sostenible / CIAF",
+      "hostNote": "Intact government-authored PDF republished by Vía Libre, Fundación de los Ferrocarriles Españoles. Not hosted on the original Ministry domain.",
+      "supports": [
+        "18 January 2026 accident",
+        "Initial derailment at PK318+693 on line 010 Madrid–Sevilla",
+        "Subsequent collision at approximately PK318+200"
+      ],
+      "shortQuote": "PK 318,693 de la línea 010 Madrid - Sevilla"
+    },
+    {
+      "id": "urda-corridor-madrid",
+      "title": "Accidente ferroviario en Urda, respuesta de Comunidad de Madrid",
+      "url": "https://www.comunidad.madrid/seguridad-emergencias-asem-112/accidente-ferroviario-urda-toledo",
+      "publishedAt": "2026-10-28",
+      "primaryAuthor": "Comunidad de Madrid / ASEM112",
+      "supports": [
+        "Urda on Madrid–Andalucía high-speed line",
+        "Both involved services were Madrid–Sevilla"
+      ],
+      "shortQuote": "línea de alta velocidad Madrid-Andalucía"
+    },
+    {
+      "id": "adamuz-corridor-moncloa",
+      "title": "Óscar Puente detalla obras e inspecciones de Adamuz",
+      "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/transportes-movilidad-sostenible/paginas/2026/230126-obras-inspecciones-adamuz-accidente.aspx",
+      "publishedAt": "2026-01-23",
+      "primaryAuthor": "Ministerio de Transportes / La Moncloa",
+      "supports": [
+        "Adamuz belongs to Guadalmez–Córdoba section of Madrid–Sevilla high-speed line"
+      ],
+      "shortQuote": "tramo Guadalmez-Córdoba dentro de la línea de Alta Velocidad Madrid - Sevilla"
+    },
+    {
+      "id": "ign-markerposts",
+      "title": "IGN/SCNE, IGR-RT railway marker posts and railway links",
+      "url": "https://api-features.idee.es/collections/markerpost",
+      "railwayUrl": "https://api-features.idee.es/collections/railwaylink",
+      "license": "CC-BY-4.0",
+      "attribution": "Obra derivada de IGR-RT 2026 CC-BY 4.0 scne.es",
+      "supports": [
+        "Cartographic marker posts used to derive approximate positions",
+        "Actual railway geometry; not an accident-scene survey"
+      ]
+    }
+  ],
+  "interpretationLimits": [
+    "Two different locations on the same high-speed corridor, not the same track section.",
+    "The two accidents do not have an established shared cause.",
+    "The drawn corridor uses actual IGN geometry but is not a reconstruction of train movements.",
+    "Location coordinates are chainage-based approximate locators; display circles do not imply surveyed precision.",
+    "Injury figures have different dates and definitions. No exact combined injury total is claimed."
+  ]
+}

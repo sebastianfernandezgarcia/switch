@@ -1,0 +1,2146 @@
+{
+  "format": "switch-recorded-agent-v1",
+  "provenance": "Real Meta/Baseten responses obtained 1 November 2026. Tool arguments/results are replay-verified locally; no live API request is implied when opening a saved recording.",
+  "records": [
+    {
+      "id": "c522ef5e-cdcc-4600-9206-6dc52a320366",
+      "at": "2026-11-01T13:16:03.770Z",
+      "kind": "real_meta_tool_using_rehearsal",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "scenarioId": "corridor-north-01",
+      "evidenceVersion": 1,
+      "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+      "parameters": {
+        "clearanceMinutes": 4,
+        "bypassOpen": true
+      },
+      "proposal": {
+        "title": "Ensayo de maniobra – R2 no despejado",
+        "summary": "Ensayo ficticio: esperar o desviar son viables; entrar ahora en R2 fue rechazado por falta de confirmación. Se propone bypass como alternativa probada con menor demora.",
+        "question": "¿Podemos obtener confirmación independiente de salida de T07 de R2 antes de considerar entrada?",
+        "recommendedStrategy": "bypass",
+        "evidence": [
+          {
+            "sourceId": "S3",
+            "quote": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+          },
+          {
+            "sourceId": "S2",
+            "quote": "R2 está disponible; T12 puede continuar. No se adjunta confirmación de salida de T07."
+          }
+        ],
+        "testIds": [
+          "T1",
+          "T2",
+          "T3"
+        ]
+      },
+      "tests": [
+        {
+          "id": "T1",
+          "strategy": "wait",
+          "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 8,
+            "t31Arrival": 12,
+            "totalDelay": 9,
+            "totalTravelMinutes": 11,
+            "duration": 12
+          },
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T2",
+          "strategy": "bypass",
+          "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 6,
+            "t31Arrival": 8,
+            "totalDelay": 3,
+            "totalTravelMinutes": 13,
+            "duration": 8
+          },
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T3",
+          "strategy": "enter_now",
+          "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+          "feasible": false,
+          "code": "CLEARANCE_NOT_CONFIRMED",
+          "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+          "metrics": null,
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "tool": "read_reports",
+          "arguments": {
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          },
+          "result": {
+            "evidenceVersion": 1,
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+            "reports": [
+              {
+                "id": "S1",
+                "at": "08:14:00",
+                "title": "Última posición de T07",
+                "text": "T07 fue observado en R2, entre Valle y Central. No se han recibido nuevas posiciones."
+              },
+              {
+                "id": "S2",
+                "at": "08:16:40",
+                "title": "Mensaje de estación",
+                "text": "R2 está disponible; T12 puede continuar. No se adjunta confirmación de salida de T07."
+              },
+              {
+                "id": "S3",
+                "at": "08:16:55",
+                "title": "Parte de coordinación",
+                "text": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+              }
+            ]
+          }
+        },
+        {
+          "step": 2,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "wait"
+          },
+          "result": {
+            "id": "T1",
+            "strategy": "wait",
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 8,
+              "t31Arrival": 12,
+              "totalDelay": 9,
+              "totalTravelMinutes": 11,
+              "duration": 12
+            },
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 3,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "bypass"
+          },
+          "result": {
+            "id": "T2",
+            "strategy": "bypass",
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 6,
+              "t31Arrival": 8,
+              "totalDelay": 3,
+              "totalTravelMinutes": 13,
+              "duration": 8
+            },
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "enter_now"
+          },
+          "result": {
+            "id": "T3",
+            "strategy": "enter_now",
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+            "feasible": false,
+            "code": "CLEARANCE_NOT_CONFIRMED",
+            "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+            "metrics": null,
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 5,
+          "tool": "submit_plan",
+          "arguments": {
+            "title": "Ensayo de maniobra – R2 no despejado",
+            "summary": "Ensayo ficticio: esperar o desviar son viables; entrar ahora en R2 fue rechazado por falta de confirmación. Se propone bypass como alternativa probada con menor demora.",
+            "question": "¿Podemos obtener confirmación independiente de salida de T07 de R2 antes de considerar entrada?",
+            "recommendedStrategy": "bypass",
+            "evidence": [
+              {
+                "sourceId": "S3",
+                "quote": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+              },
+              {
+                "sourceId": "S2",
+                "quote": "R2 está disponible; T12 puede continuar. No se adjunta confirmación de salida de T07."
+              }
+            ],
+            "testIds": [
+              "T1",
+              "T2",
+              "T3"
+            ]
+          },
+          "result": {
+            "accepted": true,
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396"
+          }
+        }
+      ],
+      "events": [
+        {
+          "type": "provider_response",
+          "call": 1,
+          "tools": [
+            "read_reports",
+            "test_plan",
+            "test_plan",
+            "test_plan"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 2,
+          "tools": [
+            "submit_plan"
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 2,
+        "promptTokens": 3508,
+        "completionTokens": 839,
+        "reservedEstimateUsd": 0.086319
+      },
+      "elapsedMs": 3428,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    },
+    {
+      "id": "ebeb4c15-d1a1-4e21-9ce4-2c3c56bf3daf",
+      "at": "2026-11-01T13:16:52.805Z",
+      "kind": "real_meta_tool_using_rehearsal",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "scenarioId": "corridor-update-04",
+      "evidenceVersion": 2,
+      "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+      "parameters": {
+        "clearanceMinutes": 4,
+        "bypassOpen": false
+      },
+      "proposal": {
+        "evidence": [
+          {
+            "sourceId": "S4",
+            "quote": "Actualización del ejercicio: R5, entre Central y Ladera, queda cerrado por mantenimiento desde las 08:17:35. La propuesta de desvío anterior no es utilizable. No hay confirmación nueva sobre la salida de T07 de R2."
+          },
+          {
+            "sourceId": "S3",
+            "quote": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+          }
+        ],
+        "question": "¿Puede confirmar la salida de T07 de R2 mediante telemetría actualizada o confirmación de estación antes de autorizar ocupación?",
+        "recommendedStrategy": "wait",
+        "summary": "Ensayo a las 08:18: alternativa esperar verificada sin solapamientos según reglas declaradas (T1). Entrada inmediata no confirmada y desvío cerrado en esta rama.",
+        "testIds": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "title": "Ensayo 08:18 - Esperar es la opción verificada"
+      },
+      "tests": [
+        {
+          "id": "T1",
+          "strategy": "wait",
+          "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 8,
+            "t31Arrival": 12,
+            "totalDelay": 9,
+            "totalTravelMinutes": 11,
+            "duration": 12
+          },
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": false
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ]
+        },
+        {
+          "id": "T2",
+          "strategy": "bypass",
+          "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+          "feasible": false,
+          "code": "BYPASS_CLOSED",
+          "reason": "La vía por Ladera está cerrada en esta rama del escenario.",
+          "metrics": null,
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": false
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ]
+        },
+        {
+          "id": "T3",
+          "strategy": "enter_now",
+          "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+          "feasible": false,
+          "code": "CLEARANCE_NOT_CONFIRMED",
+          "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+          "metrics": null,
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": false
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "tool": "read_reports",
+          "arguments": {
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3",
+              "S4"
+            ]
+          },
+          "result": {
+            "evidenceVersion": 2,
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+            "reports": [
+              {
+                "id": "S1",
+                "at": "08:14:00",
+                "title": "Última posición de T07",
+                "text": "T07 fue observado en R2, entre Valle y Central. No se han recibido nuevas posiciones."
+              },
+              {
+                "id": "S2",
+                "at": "08:16:40",
+                "title": "Mensaje de estación",
+                "text": "R2 está disponible; T12 puede continuar. No se adjunta confirmación de salida de T07."
+              },
+              {
+                "id": "S3",
+                "at": "08:16:55",
+                "title": "Parte de coordinación",
+                "text": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+              },
+              {
+                "id": "S4",
+                "at": "08:17:35",
+                "title": "Nuevo aviso de mantenimiento",
+                "text": "Actualización del ejercicio: R5, entre Central y Ladera, queda cerrado por mantenimiento desde las 08:17:35. La propuesta de desvío anterior no es utilizable. No hay confirmación nueva sobre la salida de T07 de R2."
+              }
+            ]
+          }
+        },
+        {
+          "step": 2,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "wait"
+          },
+          "result": {
+            "id": "T1",
+            "strategy": "wait",
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 8,
+              "t31Arrival": 12,
+              "totalDelay": 9,
+              "totalTravelMinutes": 11,
+              "duration": 12
+            },
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": false
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3",
+              "S4"
+            ]
+          }
+        },
+        {
+          "step": 3,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "bypass"
+          },
+          "result": {
+            "id": "T2",
+            "strategy": "bypass",
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+            "feasible": false,
+            "code": "BYPASS_CLOSED",
+            "reason": "La vía por Ladera está cerrada en esta rama del escenario.",
+            "metrics": null,
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": false
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3",
+              "S4"
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "enter_now"
+          },
+          "result": {
+            "id": "T3",
+            "strategy": "enter_now",
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+            "feasible": false,
+            "code": "CLEARANCE_NOT_CONFIRMED",
+            "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+            "metrics": null,
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": false
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3",
+              "S4"
+            ]
+          }
+        },
+        {
+          "step": 5,
+          "tool": "submit_plan",
+          "arguments": {
+            "evidence": [
+              {
+                "sourceId": "S4",
+                "quote": "Actualización del ejercicio: R5, entre Central y Ladera, queda cerrado por mantenimiento desde las 08:17:35. La propuesta de desvío anterior no es utilizable. No hay confirmación nueva sobre la salida de T07 de R2."
+              },
+              {
+                "sourceId": "S3",
+                "quote": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+              }
+            ],
+            "question": "¿Puede confirmar la salida de T07 de R2 mediante telemetría actualizada o confirmación de estación antes de autorizar ocupación?",
+            "recommendedStrategy": "wait",
+            "summary": "Ensayo a las 08:18: alternativa esperar verificada sin solapamientos según reglas declaradas (T1). Entrada inmediata no confirmada y desvío cerrado en esta rama.",
+            "testIds": [
+              "T1",
+              "T2",
+              "T3"
+            ],
+            "title": "Ensayo 08:18 - Esperar es la opción verificada"
+          },
+          "result": {
+            "accepted": true,
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb"
+          }
+        }
+      ],
+      "events": [
+        {
+          "type": "provider_response",
+          "call": 1,
+          "tools": [
+            "read_reports",
+            "test_plan",
+            "test_plan",
+            "test_plan"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 2,
+          "tools": [
+            "submit_plan"
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 2,
+        "promptTokens": 3631,
+        "completionTokens": 855,
+        "reservedEstimateUsd": 0.08731900000000001
+      },
+      "elapsedMs": 3631,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    },
+    {
+      "id": "0ed2fdf5-251e-4ab7-b3df-6f67de6f91d2",
+      "at": "2026-11-01T13:18:13.329Z",
+      "kind": "real_meta_tool_using_rehearsal",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "scenarioId": "clearance-received-03",
+      "evidenceVersion": 1,
+      "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+      "parameters": {
+        "clearanceMinutes": 0,
+        "bypassOpen": true
+      },
+      "proposal": {
+        "evidence": [
+          {
+            "sourceId": "S1",
+            "quote": "En este ejercicio ficticio se confirma que T07 ha abandonado R2 por completo. R2 está libre desde las 08:16:45."
+          },
+          {
+            "sourceId": "S3",
+            "quote": "El desvío Central-Ladera-Valle está abierto en el ejercicio y requiere seis minutos. R2 requiere cuatro minutos."
+          }
+        ],
+        "question": "¿Se confirma cierre de reservas tras 08:17 para validar entrada inmediata?",
+        "recommendedStrategy": "enter_now",
+        "summary": "Ensayo ficticio valida entrada inmediata por R2 libre; alternativas probadas sin solapamiento según reglas del ensayo.",
+        "testIds": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "title": "Ensayo despacho ficticio R2"
+      },
+      "tests": [
+        {
+          "id": "T1",
+          "strategy": "wait",
+          "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 4,
+            "t31Arrival": 8,
+            "totalDelay": 1,
+            "totalTravelMinutes": 11,
+            "duration": 8
+          },
+          "assumptions": {
+            "clearanceMinutes": 0,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T2",
+          "strategy": "bypass",
+          "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 6,
+            "t31Arrival": 7,
+            "totalDelay": 2,
+            "totalTravelMinutes": 13,
+            "duration": 7
+          },
+          "assumptions": {
+            "clearanceMinutes": 0,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T3",
+          "strategy": "enter_now",
+          "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 4,
+            "t31Arrival": 8,
+            "totalDelay": 1,
+            "totalTravelMinutes": 11,
+            "duration": 8
+          },
+          "assumptions": {
+            "clearanceMinutes": 0,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "tool": "read_reports",
+          "arguments": {
+            "sourceIds": [
+              "S1"
+            ]
+          },
+          "result": {
+            "evidenceVersion": 1,
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+            "reports": [
+              {
+                "id": "S1",
+                "at": "08:16:45",
+                "title": "Confirmación del ejercicio",
+                "text": "En este ejercicio ficticio se confirma que T07 ha abandonado R2 por completo. R2 está libre desde las 08:16:45."
+              }
+            ]
+          }
+        },
+        {
+          "step": 2,
+          "tool": "read_reports",
+          "arguments": {
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          },
+          "result": {
+            "evidenceVersion": 1,
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+            "reports": [
+              {
+                "id": "S1",
+                "at": "08:16:45",
+                "title": "Confirmación del ejercicio",
+                "text": "En este ejercicio ficticio se confirma que T07 ha abandonado R2 por completo. R2 está libre desde las 08:16:45."
+              },
+              {
+                "id": "S2",
+                "at": "08:16:50",
+                "title": "Acuse de coordinación",
+                "text": "Coordinación registra la confirmación de salida de T07. T12 espera en Central y T31 llega desde Costa; ambos necesitarán R2."
+              },
+              {
+                "id": "S3",
+                "at": "08:16:55",
+                "title": "Estado del desvío",
+                "text": "El desvío Central-Ladera-Valle está abierto en el ejercicio y requiere seis minutos. R2 requiere cuatro minutos."
+              }
+            ]
+          }
+        },
+        {
+          "step": 3,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "wait"
+          },
+          "result": {
+            "id": "T1",
+            "strategy": "wait",
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 4,
+              "t31Arrival": 8,
+              "totalDelay": 1,
+              "totalTravelMinutes": 11,
+              "duration": 8
+            },
+            "assumptions": {
+              "clearanceMinutes": 0,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "bypass"
+          },
+          "result": {
+            "id": "T2",
+            "strategy": "bypass",
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 6,
+              "t31Arrival": 7,
+              "totalDelay": 2,
+              "totalTravelMinutes": 13,
+              "duration": 7
+            },
+            "assumptions": {
+              "clearanceMinutes": 0,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 5,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "enter_now"
+          },
+          "result": {
+            "id": "T3",
+            "strategy": "enter_now",
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 4,
+              "t31Arrival": 8,
+              "totalDelay": 1,
+              "totalTravelMinutes": 11,
+              "duration": 8
+            },
+            "assumptions": {
+              "clearanceMinutes": 0,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 6,
+          "tool": "submit_plan",
+          "arguments": {
+            "evidence": [
+              {
+                "sourceId": "S1",
+                "quote": "En este ejercicio ficticio se confirma que T07 ha abandonado R2 por completo. R2 está libre desde las 08:16:45."
+              },
+              {
+                "sourceId": "S3",
+                "quote": "El desvío Central-Ladera-Valle está abierto en el ejercicio y requiere seis minutos. R2 requiere cuatro minutos."
+              }
+            ],
+            "question": "¿Se confirma cierre de reservas tras 08:17 para validar entrada inmediata?",
+            "recommendedStrategy": "enter_now",
+            "summary": "Ensayo ficticio valida entrada inmediata por R2 libre; alternativas probadas sin solapamiento según reglas del ensayo.",
+            "testIds": [
+              "T1",
+              "T2",
+              "T3"
+            ],
+            "title": "Ensayo despacho ficticio R2"
+          },
+          "result": {
+            "accepted": true,
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f"
+          }
+        }
+      ],
+      "events": [
+        {
+          "type": "provider_response",
+          "call": 1,
+          "tools": [
+            "read_reports",
+            "read_reports",
+            "test_plan",
+            "test_plan",
+            "test_plan"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 2,
+          "tools": [
+            "submit_plan"
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 2,
+        "promptTokens": 3758,
+        "completionTokens": 834,
+        "reservedEstimateUsd": 0.0881515
+      },
+      "elapsedMs": 3145,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    },
+    {
+      "id": "0cef1ada-4722-4dc7-b5fc-f9e734824f89",
+      "at": "2026-11-01T22:23:17.031Z",
+      "kind": "real_meta_tool_using_rehearsal",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "language": "en",
+      "localizedLanguages": [
+        "en",
+        "es"
+      ],
+      "scenarioId": "corridor-north-01",
+      "evidenceVersion": 1,
+      "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+      "parameters": {
+        "clearanceMinutes": 4,
+        "bypassOpen": true
+      },
+      "proposal": {
+        "title": "Rehearsal: R2 Occupancy Unconfirmed - Hold and Bypass Test",
+        "summary": "Fictional rehearsal only. At 08:17 under hypothetical 4-min clearance, R2 status remains unconfirmed from stale T07 position. Tested wait (feasible), bypass via R4-R5 (feasible), enter_now rejected. Feasible under model rules does not equal professionally verified safe.",
+        "question": "Can we obtain independent confirmation that T07 has cleared R2 before authorizing T12, given enter_now was rejected?",
+        "recommendedStrategy": "bypass",
+        "evidence": [
+          {
+            "sourceId": "S1",
+            "quote": "T07 fue observado en R2, entre Valle y Central. No se han recibido nuevas posiciones."
+          },
+          {
+            "sourceId": "S3",
+            "quote": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+          }
+        ],
+        "testIds": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "localized": {
+          "es": {
+            "title": "Ensayo: Ocupación de R2 no confirmada - Prueba de espera y desvío",
+            "summary": "Solo ensayo ficticio. A las 08:17 con hipótesis de 4 min de despeje, R2 sigue sin confirmar por posición antigua de T07. Se probó esperar (viable), desvío por R4-R5 (viable), entrada inmediata rechazada. Viable según reglas del modelo no equivale a seguro verificado profesionalmente.",
+            "question": "¿Podemos obtener confirmación independiente de que T07 liberó R2 antes de autorizar a T12, dado que entrada inmediata fue rechazada?"
+          }
+        }
+      },
+      "tests": [
+        {
+          "id": "T1",
+          "strategy": "wait",
+          "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 8,
+            "t31Arrival": 12,
+            "totalDelay": 9,
+            "totalTravelMinutes": 11,
+            "duration": 12
+          },
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T2",
+          "strategy": "bypass",
+          "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 6,
+            "t31Arrival": 8,
+            "totalDelay": 3,
+            "totalTravelMinutes": 13,
+            "duration": 8
+          },
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T3",
+          "strategy": "enter_now",
+          "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+          "feasible": false,
+          "code": "CLEARANCE_NOT_CONFIRMED",
+          "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+          "metrics": null,
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "tool": "read_reports",
+          "arguments": {
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          },
+          "result": {
+            "evidenceVersion": 1,
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+            "reports": [
+              {
+                "id": "S1",
+                "at": "08:14:00",
+                "title": "Última posición de T07",
+                "text": "T07 fue observado en R2, entre Valle y Central. No se han recibido nuevas posiciones."
+              },
+              {
+                "id": "S2",
+                "at": "08:16:40",
+                "title": "Mensaje de estación",
+                "text": "R2 está disponible; T12 puede continuar. No se adjunta confirmación de salida de T07."
+              },
+              {
+                "id": "S3",
+                "at": "08:16:55",
+                "title": "Parte de coordinación",
+                "text": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+              }
+            ]
+          }
+        },
+        {
+          "step": 2,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "wait"
+          },
+          "result": {
+            "id": "T1",
+            "strategy": "wait",
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 8,
+              "t31Arrival": 12,
+              "totalDelay": 9,
+              "totalTravelMinutes": 11,
+              "duration": 12
+            },
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 3,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "bypass"
+          },
+          "result": {
+            "id": "T2",
+            "strategy": "bypass",
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 6,
+              "t31Arrival": 8,
+              "totalDelay": 3,
+              "totalTravelMinutes": 13,
+              "duration": 8
+            },
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "enter_now"
+          },
+          "result": {
+            "id": "T3",
+            "strategy": "enter_now",
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396",
+            "feasible": false,
+            "code": "CLEARANCE_NOT_CONFIRMED",
+            "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+            "metrics": null,
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 5,
+          "tool": "submit_plan",
+          "arguments": {
+            "title": "Rehearsal: R2 Occupancy Unconfirmed - Hold and Bypass Test",
+            "summary": "Fictional rehearsal only. At 08:17 under hypothetical 4-min clearance, R2 status remains unconfirmed from stale T07 position. Tested wait (feasible), bypass via R4-R5 (feasible), enter_now rejected. Feasible under model rules does not equal professionally verified safe.",
+            "question": "Can we obtain independent confirmation that T07 has cleared R2 before authorizing T12, given enter_now was rejected?",
+            "recommendedStrategy": "bypass",
+            "evidence": [
+              {
+                "sourceId": "S1",
+                "quote": "T07 fue observado en R2, entre Valle y Central. No se han recibido nuevas posiciones."
+              },
+              {
+                "sourceId": "S3",
+                "quote": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+              }
+            ],
+            "testIds": [
+              "T1",
+              "T2",
+              "T3"
+            ],
+            "localized": {
+              "es": {
+                "title": "Ensayo: Ocupación de R2 no confirmada - Prueba de espera y desvío",
+                "summary": "Solo ensayo ficticio. A las 08:17 con hipótesis de 4 min de despeje, R2 sigue sin confirmar por posición antigua de T07. Se probó esperar (viable), desvío por R4-R5 (viable), entrada inmediata rechazada. Viable según reglas del modelo no equivale a seguro verificado profesionalmente.",
+                "question": "¿Podemos obtener confirmación independiente de que T07 liberó R2 antes de autorizar a T12, dado que entrada inmediata fue rechazada?"
+              }
+            }
+          },
+          "result": {
+            "accepted": true,
+            "scenarioHash": "767e12a088760766432b318b19fa055633be4fbb35ab1c9c6ef190f100a4a396"
+          }
+        }
+      ],
+      "events": [
+        {
+          "type": "provider_response",
+          "call": 1,
+          "tools": [
+            "read_reports"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 2,
+          "tools": [
+            "test_plan",
+            "test_plan",
+            "test_plan"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 3,
+          "tools": [
+            "submit_plan"
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 3,
+        "promptTokens": 5298,
+        "completionTokens": 614,
+        "reservedEstimateUsd": 0.13103599999999999
+      },
+      "elapsedMs": 4441,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    },
+    {
+      "id": "2ff16372-2acb-4466-aec8-cafda1553348",
+      "at": "2026-11-01T22:27:30.671Z",
+      "kind": "real_meta_tool_using_rehearsal",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "language": "en",
+      "localizedLanguages": [
+        "en",
+        "es"
+      ],
+      "scenarioId": "corridor-update-04",
+      "evidenceVersion": 2,
+      "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+      "parameters": {
+        "clearanceMinutes": 4,
+        "bypassOpen": false
+      },
+      "proposal": {
+        "title": "Rehearsal plan: wait for R2 clearance",
+        "summary": "Fictional rehearsal testing the human assumption of 4-min hypothetical clearance. Model shows wait is feasible under rules; bypass closed and enter_now rejected for lack of exit confirmation. Do not infer exit from stale position.",
+        "question": "Can fresh confirmation be provided that T07 has left R2 and that any bypass remains as tested?",
+        "recommendedStrategy": "wait",
+        "evidence": [
+          {
+            "sourceId": "S4",
+            "quote": "Actualización del ejercicio: R5, entre Central y Ladera, queda cerrado por mantenimiento desde las 08:17:35. La propuesta de desvío anterior no es utilizable. No hay confirmación nueva sobre la salida de T07 de R2."
+          },
+          {
+            "sourceId": "S3",
+            "quote": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+          },
+          {
+            "sourceId": "S1",
+            "quote": "T07 fue observado en R2, entre Valle y Central. No se han recibido nuevas posiciones."
+          }
+        ],
+        "testIds": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "localized": {
+          "es": {
+            "title": "Plan de ensayo: esperar despeje de R2",
+            "summary": "Ensayo ficticio que prueba el supuesto humano de despeje hipotético de 4 min. El modelo indica esperar factible según reglas; desvío cerrado y entrada inmediata rechazada por falta de confirmación de salida. No inferir salida por posición antigua.",
+            "question": "¿Puede aportarse confirmación reciente de que T07 salió de R2 y de que el desvío sigue como probado?"
+          }
+        }
+      },
+      "tests": [
+        {
+          "id": "T1",
+          "strategy": "wait",
+          "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 8,
+            "t31Arrival": 12,
+            "totalDelay": 9,
+            "totalTravelMinutes": 11,
+            "duration": 12
+          },
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": false
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ]
+        },
+        {
+          "id": "T2",
+          "strategy": "bypass",
+          "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+          "feasible": false,
+          "code": "BYPASS_CLOSED",
+          "reason": "La vía por Ladera está cerrada en esta rama del escenario.",
+          "metrics": null,
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": false
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ]
+        },
+        {
+          "id": "T3",
+          "strategy": "enter_now",
+          "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+          "feasible": false,
+          "code": "CLEARANCE_NOT_CONFIRMED",
+          "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+          "metrics": null,
+          "assumptions": {
+            "clearanceMinutes": 4,
+            "bypassOpen": false
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3",
+            "S4"
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "tool": "read_reports",
+          "arguments": {
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3",
+              "S4"
+            ]
+          },
+          "result": {
+            "evidenceVersion": 2,
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+            "reports": [
+              {
+                "id": "S1",
+                "at": "08:14:00",
+                "title": "Última posición de T07",
+                "text": "T07 fue observado en R2, entre Valle y Central. No se han recibido nuevas posiciones."
+              },
+              {
+                "id": "S2",
+                "at": "08:16:40",
+                "title": "Mensaje de estación",
+                "text": "R2 está disponible; T12 puede continuar. No se adjunta confirmación de salida de T07."
+              },
+              {
+                "id": "S3",
+                "at": "08:16:55",
+                "title": "Parte de coordinación",
+                "text": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+              },
+              {
+                "id": "S4",
+                "at": "08:17:35",
+                "title": "Nuevo aviso de mantenimiento",
+                "text": "Actualización del ejercicio: R5, entre Central y Ladera, queda cerrado por mantenimiento desde las 08:17:35. La propuesta de desvío anterior no es utilizable. No hay confirmación nueva sobre la salida de T07 de R2."
+              }
+            ]
+          }
+        },
+        {
+          "step": 2,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "wait"
+          },
+          "result": {
+            "id": "T1",
+            "strategy": "wait",
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 8,
+              "t31Arrival": 12,
+              "totalDelay": 9,
+              "totalTravelMinutes": 11,
+              "duration": 12
+            },
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": false
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3",
+              "S4"
+            ]
+          }
+        },
+        {
+          "step": 3,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "bypass"
+          },
+          "result": {
+            "id": "T2",
+            "strategy": "bypass",
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+            "feasible": false,
+            "code": "BYPASS_CLOSED",
+            "reason": "La vía por Ladera está cerrada en esta rama del escenario.",
+            "metrics": null,
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": false
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3",
+              "S4"
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "enter_now"
+          },
+          "result": {
+            "id": "T3",
+            "strategy": "enter_now",
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb",
+            "feasible": false,
+            "code": "CLEARANCE_NOT_CONFIRMED",
+            "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+            "metrics": null,
+            "assumptions": {
+              "clearanceMinutes": 4,
+              "bypassOpen": false
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3",
+              "S4"
+            ]
+          }
+        },
+        {
+          "step": 5,
+          "tool": "submit_plan",
+          "arguments": {
+            "title": "Rehearsal plan: wait for R2 clearance",
+            "summary": "Fictional rehearsal testing the human assumption of 4-min hypothetical clearance. Model shows wait is feasible under rules; bypass closed and enter_now rejected for lack of exit confirmation. Do not infer exit from stale position.",
+            "question": "Can fresh confirmation be provided that T07 has left R2 and that any bypass remains as tested?",
+            "recommendedStrategy": "wait",
+            "evidence": [
+              {
+                "sourceId": "S4",
+                "quote": "Actualización del ejercicio: R5, entre Central y Ladera, queda cerrado por mantenimiento desde las 08:17:35. La propuesta de desvío anterior no es utilizable. No hay confirmación nueva sobre la salida de T07 de R2."
+              },
+              {
+                "sourceId": "S3",
+                "quote": "No podemos confirmar que T07 haya abandonado R2. La comprobación sigue pendiente."
+              },
+              {
+                "sourceId": "S1",
+                "quote": "T07 fue observado en R2, entre Valle y Central. No se han recibido nuevas posiciones."
+              }
+            ],
+            "testIds": [
+              "T1",
+              "T2",
+              "T3"
+            ],
+            "localized": {
+              "es": {
+                "title": "Plan de ensayo: esperar despeje de R2",
+                "summary": "Ensayo ficticio que prueba el supuesto humano de despeje hipotético de 4 min. El modelo indica esperar factible según reglas; desvío cerrado y entrada inmediata rechazada por falta de confirmación de salida. No inferir salida por posición antigua.",
+                "question": "¿Puede aportarse confirmación reciente de que T07 salió de R2 y de que el desvío sigue como probado?"
+              }
+            }
+          },
+          "result": {
+            "accepted": true,
+            "scenarioHash": "58209061c429a6bb99c6ea3a85e43626e64cc8b12a51c8950f0627c6fd575ffb"
+          }
+        }
+      ],
+      "events": [
+        {
+          "type": "provider_response",
+          "call": 1,
+          "tools": [
+            "read_reports"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 2,
+          "tools": [
+            "test_plan",
+            "test_plan",
+            "test_plan"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 3,
+          "tools": [
+            "submit_plan"
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 3,
+        "promptTokens": 5380,
+        "completionTokens": 585,
+        "reservedEstimateUsd": 0.131106
+      },
+      "elapsedMs": 3425,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    },
+    {
+      "id": "3b6b1bb8-e9a9-4237-a60f-e1760e716313",
+      "at": "2026-11-01T22:28:57.473Z",
+      "kind": "real_meta_tool_using_rehearsal",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "language": "en",
+      "localizedLanguages": [
+        "en",
+        "es"
+      ],
+      "scenarioId": "ladera-closed-02",
+      "evidenceVersion": 1,
+      "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04",
+      "parameters": {
+        "clearanceMinutes": 6,
+        "bypassOpen": false
+      },
+      "proposal": {
+        "title": "Rehearsal: Wait Holds Feasible Under 6-min Clearance",
+        "summary": "Under the hypothetical 6-min clearance, wait is feasible per model, others rejected. Stale position does not confirm R2 free and R5 is closed. Recommend wait.",
+        "question": "Can we get fresh confirmation T07 cleared R2 and R5 reopen status?",
+        "recommendedStrategy": "wait",
+        "evidence": [
+          {
+            "sourceId": "S1",
+            "quote": "T07 permanece sin confirmación de salida de R2. El último dato disponible tiene dos minutos."
+          },
+          {
+            "sourceId": "S2",
+            "quote": "R5, entre Central y Ladera, está cerrado por mantenimiento en este ejercicio. No hay hora de reapertura."
+          },
+          {
+            "sourceId": "S3",
+            "quote": "Se propone enviar T12 por Ladera. La propuesta no incorpora el cierre de R5 ni confirma la salida de T07."
+          }
+        ],
+        "testIds": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "localized": {
+          "es": {
+            "title": "Ensayo: Esperar es viable con margen hipotético de 6 min",
+            "summary": "Bajo el margen hipotético de 6 min, esperar es viable según el modelo, las demás rechazadas. Posición antigua no libera R2 y R5 cerrado. Se recomienda esperar.",
+            "question": "¿Podemos obtener confirmación fresca de que T07 liberó R2 y estado de reapertura de R5?"
+          }
+        }
+      },
+      "tests": [
+        {
+          "id": "T1",
+          "strategy": "wait",
+          "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 10,
+            "t31Arrival": 14,
+            "totalDelay": 13,
+            "totalTravelMinutes": 11,
+            "duration": 14
+          },
+          "assumptions": {
+            "clearanceMinutes": 6,
+            "bypassOpen": false
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T2",
+          "strategy": "bypass",
+          "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04",
+          "feasible": false,
+          "code": "BYPASS_CLOSED",
+          "reason": "La vía por Ladera está cerrada en esta rama del escenario.",
+          "metrics": null,
+          "assumptions": {
+            "clearanceMinutes": 6,
+            "bypassOpen": false
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T3",
+          "strategy": "enter_now",
+          "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04",
+          "feasible": false,
+          "code": "CLEARANCE_NOT_CONFIRMED",
+          "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+          "metrics": null,
+          "assumptions": {
+            "clearanceMinutes": 6,
+            "bypassOpen": false
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "tool": "read_reports",
+          "arguments": {
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          },
+          "result": {
+            "evidenceVersion": 1,
+            "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04",
+            "reports": [
+              {
+                "id": "S1",
+                "at": "08:15:00",
+                "title": "Último dato de T07",
+                "text": "T07 permanece sin confirmación de salida de R2. El último dato disponible tiene dos minutos."
+              },
+              {
+                "id": "S2",
+                "at": "08:16:20",
+                "title": "Parte de mantenimiento",
+                "text": "R5, entre Central y Ladera, está cerrado por mantenimiento en este ejercicio. No hay hora de reapertura."
+              },
+              {
+                "id": "S3",
+                "at": "08:16:50",
+                "title": "Propuesta por radio",
+                "text": "Se propone enviar T12 por Ladera. La propuesta no incorpora el cierre de R5 ni confirma la salida de T07."
+              }
+            ]
+          }
+        },
+        {
+          "step": 2,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "wait"
+          },
+          "result": {
+            "id": "T1",
+            "strategy": "wait",
+            "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 10,
+              "t31Arrival": 14,
+              "totalDelay": 13,
+              "totalTravelMinutes": 11,
+              "duration": 14
+            },
+            "assumptions": {
+              "clearanceMinutes": 6,
+              "bypassOpen": false
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 3,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "bypass"
+          },
+          "result": {
+            "id": "T2",
+            "strategy": "bypass",
+            "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04",
+            "feasible": false,
+            "code": "BYPASS_CLOSED",
+            "reason": "La vía por Ladera está cerrada en esta rama del escenario.",
+            "metrics": null,
+            "assumptions": {
+              "clearanceMinutes": 6,
+              "bypassOpen": false
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "enter_now"
+          },
+          "result": {
+            "id": "T3",
+            "strategy": "enter_now",
+            "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04",
+            "feasible": false,
+            "code": "CLEARANCE_NOT_CONFIRMED",
+            "reason": "No hay confirmación de que R2 esté libre. Una posición vencida no despeja un tramo.",
+            "metrics": null,
+            "assumptions": {
+              "clearanceMinutes": 6,
+              "bypassOpen": false
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 5,
+          "tool": "submit_plan",
+          "arguments": {
+            "title": "Rehearsal: Wait Holds Feasible Under 6-min Clearance",
+            "summary": "Under the hypothetical 6-min clearance, wait is feasible per model, others rejected. Stale position does not confirm R2 free and R5 is closed. Recommend wait.",
+            "question": "Can we get fresh confirmation T07 cleared R2 and R5 reopen status?",
+            "recommendedStrategy": "wait",
+            "evidence": [
+              {
+                "sourceId": "S1",
+                "quote": "T07 permanece sin confirmación de salida de R2. El último dato disponible tiene dos minutos."
+              },
+              {
+                "sourceId": "S2",
+                "quote": "R5, entre Central y Ladera, está cerrado por mantenimiento en este ejercicio. No hay hora de reapertura."
+              },
+              {
+                "sourceId": "S3",
+                "quote": "Se propone enviar T12 por Ladera. La propuesta no incorpora el cierre de R5 ni confirma la salida de T07."
+              }
+            ],
+            "testIds": [
+              "T1",
+              "T2",
+              "T3"
+            ],
+            "localized": {
+              "es": {
+                "title": "Ensayo: Esperar es viable con margen hipotético de 6 min",
+                "summary": "Bajo el margen hipotético de 6 min, esperar es viable según el modelo, las demás rechazadas. Posición antigua no libera R2 y R5 cerrado. Se recomienda esperar.",
+                "question": "¿Podemos obtener confirmación fresca de que T07 liberó R2 y estado de reapertura de R5?"
+              }
+            }
+          },
+          "result": {
+            "accepted": true,
+            "scenarioHash": "9a84275d133b5b459288109688f5824eebeaf9a7b43a40581a15ca88d2d70c04"
+          }
+        }
+      ],
+      "events": [
+        {
+          "type": "provider_response",
+          "call": 1,
+          "tools": [
+            "read_reports"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 2,
+          "tools": [
+            "test_plan",
+            "test_plan",
+            "test_plan"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 3,
+          "tools": [
+            "submit_plan"
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 3,
+        "promptTokens": 5170,
+        "completionTokens": 538,
+        "reservedEstimateUsd": 0.1290385
+      },
+      "elapsedMs": 3029,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    },
+    {
+      "id": "d76f817f-6420-40bc-b0b4-d19be6b8626d",
+      "at": "2026-11-01T22:32:59.965Z",
+      "kind": "real_meta_tool_using_rehearsal",
+      "provider": "baseten",
+      "model": "meta-models/muse-spark-open-1026",
+      "language": "en",
+      "localizedLanguages": [
+        "en",
+        "es"
+      ],
+      "scenarioId": "clearance-received-03",
+      "evidenceVersion": 1,
+      "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+      "parameters": {
+        "clearanceMinutes": 0,
+        "bypassOpen": true
+      },
+      "proposal": {
+        "evidence": [
+          {
+            "sourceId": "S1",
+            "quote": "En este ejercicio ficticio se confirma que T07 ha abandonado R2 por completo. R2 está libre desde las 08:16:45."
+          },
+          {
+            "sourceId": "S3",
+            "quote": "El desvío Central-Ladera-Valle está abierto en el ejercicio y requiere seis minutos. R2 requiere cuatro minutos."
+          }
+        ],
+        "localized": {
+          "es": {
+            "question": "¿Es necesario confirmar el movimiento de ambos trenes bajo la hipótesis de que R2 está libre?",
+            "summary": "Ensayo ficticio. Bajo la hipótesis humana de que R2 está libre (cero minutos), feasible según reglas del modelo. Se recomienda esperar. Pregunta: ¿Confirmar movimiento coordinado de T12 y T31?",
+            "title": "Ensayo de autorización T12/T31 por R2 y desvío"
+          }
+        },
+        "question": "Need to confirm movement of both trains under hypothesis that R2 is clear?",
+        "recommendedStrategy": "wait",
+        "summary": "Fictional rehearsal. Under human hypothesis clearance zero that R2 is clear, feasible under model rules. Recommend wait. Ask: confirm coordinated movement of T12 and T31?",
+        "testIds": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "title": "Rehearsal authorization T12/T31 via R2 and bypass"
+      },
+      "tests": [
+        {
+          "id": "T1",
+          "strategy": "wait",
+          "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 4,
+            "t31Arrival": 8,
+            "totalDelay": 1,
+            "totalTravelMinutes": 11,
+            "duration": 8
+          },
+          "assumptions": {
+            "clearanceMinutes": 0,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T2",
+          "strategy": "bypass",
+          "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 6,
+            "t31Arrival": 7,
+            "totalDelay": 2,
+            "totalTravelMinutes": 13,
+            "duration": 7
+          },
+          "assumptions": {
+            "clearanceMinutes": 0,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "T3",
+          "strategy": "enter_now",
+          "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+          "feasible": true,
+          "code": "RESERVATIONS_VALID",
+          "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+          "metrics": {
+            "t12Arrival": 4,
+            "t31Arrival": 8,
+            "totalDelay": 1,
+            "totalTravelMinutes": 11,
+            "duration": 8
+          },
+          "assumptions": {
+            "clearanceMinutes": 0,
+            "bypassOpen": true
+          },
+          "sourceIds": [
+            "S1",
+            "S2",
+            "S3"
+          ]
+        }
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "tool": "read_reports",
+          "arguments": {
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          },
+          "result": {
+            "evidenceVersion": 1,
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+            "reports": [
+              {
+                "id": "S1",
+                "at": "08:16:45",
+                "title": "Confirmación del ejercicio",
+                "text": "En este ejercicio ficticio se confirma que T07 ha abandonado R2 por completo. R2 está libre desde las 08:16:45."
+              },
+              {
+                "id": "S2",
+                "at": "08:16:50",
+                "title": "Acuse de coordinación",
+                "text": "Coordinación registra la confirmación de salida de T07. T12 espera en Central y T31 llega desde Costa; ambos necesitarán R2."
+              },
+              {
+                "id": "S3",
+                "at": "08:16:55",
+                "title": "Estado del desvío",
+                "text": "El desvío Central-Ladera-Valle está abierto en el ejercicio y requiere seis minutos. R2 requiere cuatro minutos."
+              }
+            ]
+          }
+        },
+        {
+          "step": 2,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "wait"
+          },
+          "result": {
+            "id": "T1",
+            "strategy": "wait",
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 4,
+              "t31Arrival": 8,
+              "totalDelay": 1,
+              "totalTravelMinutes": 11,
+              "duration": 8
+            },
+            "assumptions": {
+              "clearanceMinutes": 0,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 3,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "bypass"
+          },
+          "result": {
+            "id": "T2",
+            "strategy": "bypass",
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 6,
+              "t31Arrival": 7,
+              "totalDelay": 2,
+              "totalTravelMinutes": 13,
+              "duration": 7
+            },
+            "assumptions": {
+              "clearanceMinutes": 0,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "tool": "test_plan",
+          "arguments": {
+            "strategy": "enter_now"
+          },
+          "result": {
+            "id": "T3",
+            "strategy": "enter_now",
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f",
+            "feasible": true,
+            "code": "RESERVATIONS_VALID",
+            "reason": "Sin solapamientos de tramo en las reglas declaradas de este ensayo.",
+            "metrics": {
+              "t12Arrival": 4,
+              "t31Arrival": 8,
+              "totalDelay": 1,
+              "totalTravelMinutes": 11,
+              "duration": 8
+            },
+            "assumptions": {
+              "clearanceMinutes": 0,
+              "bypassOpen": true
+            },
+            "sourceIds": [
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        },
+        {
+          "step": 5,
+          "tool": "submit_plan",
+          "arguments": {
+            "evidence": [
+              {
+                "sourceId": "S1",
+                "quote": "En este ejercicio ficticio se confirma que T07 ha abandonado R2 por completo. R2 está libre desde las 08:16:45."
+              },
+              {
+                "sourceId": "S3",
+                "quote": "El desvío Central-Ladera-Valle está abierto en el ejercicio y requiere seis minutos. R2 requiere cuatro minutos."
+              }
+            ],
+            "localized": {
+              "es": {
+                "question": "¿Es necesario confirmar el movimiento de ambos trenes bajo la hipótesis de que R2 está libre?",
+                "summary": "Ensayo ficticio. Bajo la hipótesis humana de que R2 está libre (cero minutos), feasible según reglas del modelo. Se recomienda esperar. Pregunta: ¿Confirmar movimiento coordinado de T12 y T31?",
+                "title": "Ensayo de autorización T12/T31 por R2 y desvío"
+              }
+            },
+            "question": "Need to confirm movement of both trains under hypothesis that R2 is clear?",
+            "recommendedStrategy": "wait",
+            "summary": "Fictional rehearsal. Under human hypothesis clearance zero that R2 is clear, feasible under model rules. Recommend wait. Ask: confirm coordinated movement of T12 and T31?",
+            "testIds": [
+              "T1",
+              "T2",
+              "T3"
+            ],
+            "title": "Rehearsal authorization T12/T31 via R2 and bypass"
+          },
+          "result": {
+            "accepted": true,
+            "scenarioHash": "523adfb9d9dde98a64d4ccfba174f32f536604ce4d53b3ce1773ac6db2f9a37f"
+          }
+        }
+      ],
+      "events": [
+        {
+          "type": "provider_response",
+          "call": 1,
+          "tools": [
+            "read_reports"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 2,
+          "tools": [
+            "test_plan",
+            "test_plan",
+            "test_plan"
+          ]
+        },
+        {
+          "type": "provider_response",
+          "call": 3,
+          "tools": [
+            "submit_plan"
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 3,
+        "promptTokens": 5261,
+        "completionTokens": 514,
+        "reservedEstimateUsd": 0.1558755
+      },
+      "elapsedMs": 3544,
+      "reasoningSaved": false,
+      "rawTransportSaved": false
+    }
+  ]
+}
